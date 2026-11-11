@@ -157,6 +157,18 @@ aside{padding:12px 12px 24px}
 #consulta .consultActions button{min-width:0;min-height:34px;padding:7px 8px;font-size:12px;border-radius:8px;line-height:1.2}
 #consulta .consultPrint{display:block;width:100%;background:transparent;border:1px solid #e0eae5;color:#436966;margin-top:7px;min-height:32px;padding:6px 9px;font-size:11px;font-weight:600;border-radius:8px}
 #consulta .consultPrint:hover{background:#eaf4ef;color:#174b4f}
+/* Descarga de mapa más discreta: una acción, sin una tarjeta de aviso permanente. */
+#consulta .consultExportRow{margin-top:9px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+#consulta .consultExportRow .consultPrint{margin:0;display:inline-flex;justify-content:center;align-items:center;gap:8px;flex:none;width:auto;max-width:100%;border:1px solid #d0dfd7;background:#f5f9f7;color:#15585a;min-height:30px;padding:6px 11px;border-radius:8px;font-weight:650;font-size:11.5px;box-shadow:none;transition:background .12s,border-color .12s}
+#consulta .consultExportRow .consultPrint:hover{background:#e8f5ee;border-color:#9ac7ba}
+#consulta .consultExportRow .consultPrint:disabled{background:#f6f8f7;opacity:.7;cursor:wait}
+#consulta .pdfDownloadIcon{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:5px;background:#e2efe9;color:#12777a;font-size:16px;line-height:1}
+#consulta .pdfFormat{font-size:10px;color:#8ba19a;white-space:nowrap}
+#consulta .pdfFeedback{margin:0;min-height:0;font-size:10.5px;line-height:1.45;color:#356b61;white-space:normal}
+#consulta .pdfFeedback:not(:empty){display:block;margin-top:8px;padding:7px 9px;border-radius:7px;background:#eef7f3;border:1px solid #d8eee4}
+#consulta .pdfFeedback.is-error{color:#8b4427;background:#fff5eb;border-color:#f3dfc8}
+#consulta .pdfFeedback.is-ok{color:#1c6352;background:#eff8f2;border-color:#d6ebe1}
+
 @media(max-width:800px){.layout{display:flex}aside{padding:10px}.sidebarLead{padding:3px 5px 10px}#consulta.consultCompact{padding:12px}}
 @media(max-width:360px){#consulta .consultHeaderTag{display:none}#consulta .consultRow{grid-template-columns:48px minmax(0,1fr)}}
 </style></head><body>
@@ -177,8 +189,11 @@ aside{padding:12px 12px 24px}
   </details>
   <p class="coverageNote" id="coverageInfo" role="status"></p>
   <div class="consultActions"><button id="fit" type="button">⌖ &nbsp;Acercar</button><button id="reset" class="secondary" type="button">↺ &nbsp;Limpiar</button></div>
-  <button id="printMap" type="button" class="consultPrint" title="Generar y descargar PDF A4 horizontal directamente">↓ &nbsp;Descargar mapa PDF</button>
-  <div id="printFeedback" class="feedback" role="status" aria-live="polite" style="margin-top:5px"></div>
+  <div class="consultExportRow">
+    <button id="printMap" type="button" class="consultPrint" title="Descargar el mapa visible en formato PDF A4 horizontal"><span aria-hidden="true" class="pdfDownloadIcon">↓</span><span>Descargar PDF</span></button>
+    <span class="pdfFormat">A4 · horizontal</span>
+  </div>
+  <div id="printFeedback" class="feedback pdfFeedback" role="status" aria-live="polite"></div>
 </section>
 <section class="panelSection" aria-label="Resumen visible"><h2>Resumen de la vista</h2><div class="metric"><div class="card"><strong id="shortShown">0</strong><small>Paradas 10 min–&lt;4 h</small></div><div class="card"><strong id="parkingShown">0</strong><small>Otras permanencias ≥4 h</small></div><div class="card"><strong id="plantelShown">0</strong><small>Estancias ≥4 h en plantel</small></div><div class="card"><strong id="readingCount">0</strong><small>Lecturas GPS</small></div></div></section>
 <section id="capas" class="panelSection"><h2>02 · Capas del mapa</h2><p class="sectionHint">Activá lo que querés ver. Las capas que cargués se administran en Herramientas.</p>
@@ -257,7 +272,7 @@ aside{padding:12px 12px 24px}
 </section></div></div><div id="status" class="status" hidden>Se necesita internet para cargar el mapa base. Las posiciones GPS están incluidas en este archivo.</div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/shpjs@6.2.0/dist/shp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@2.6.3/dist/html2canvas-pro.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 // Escritor local de shapefiles de puntos y ZIP sin compresión.
@@ -709,28 +724,28 @@ function addPdfCompass(pdf,x,y){
 }
 function addPdfLegend(pdf,entries,x,y,width,maxHeight){
   // Leyenda sobre el fondo, con control de altura para no tapar el mapa completo.
-  const rows=entries.slice(0,12);
+  const rows=entries.slice(0,10);
   let cursor=y+6;const prepared=[];
   for(const row of rows){
-    let lines=pdfWrap(pdf,row.label,width-13);
+    let lines=pdfWrap(pdf,row.label,width-12);
     if(lines.length>2)lines=lines.slice(0,2);
     prepared.push({color:row.color,lines});
-    cursor+=Math.max(5,lines.length*3.6+1);
+    cursor+=Math.max(4.5,lines.length*3.2+1);
   }
   const extra=Math.max(0,entries.length-rows.length);
   const required=cursor-y+4+(extra?4:0);
   const boxHeight=Math.min(maxHeight,required);
   pdf.setFillColor(255,255,255);pdf.setDrawColor(202,217,211);
   pdf.roundedRect(x,y,width,boxHeight,2.2,2.2,'FD');
-  pdf.setTextColor(26,58,62);pdf.setFont('helvetica','bold');pdf.setFontSize(8);
-  pdf.text('Leyenda',x+4,y+5.7);
-  let yy=y+11.2;pdf.setFont('helvetica','normal');pdf.setFontSize(6.5);
+  pdf.setTextColor(26,58,62);pdf.setFont('helvetica','bold');pdf.setFontSize(7.3);
+  pdf.text('Leyenda',x+4,y+5.4);
+  let yy=y+10.6;pdf.setFont('helvetica','normal');pdf.setFontSize(6.1);
   for(const row of prepared){
     if(yy>y+boxHeight-5)break;
     pdf.setFillColor(row.color);pdf.setDrawColor(row.color);
-    pdf.circle(x+5,yy-1.2,1.5,'FD');
+    pdf.circle(x+5,yy-1.2,1.25,'FD');
     pdf.setTextColor(35,68,73);
-    for(const line of row.lines){pdf.text(line,x+9,yy);yy+=3.55}
+    for(const line of row.lines){pdf.text(line,x+9,yy);yy+=3.25}
     yy+=1.1;
   }
   if(extra && yy<y+boxHeight-2.5){
@@ -751,7 +766,8 @@ printButton.onclick=async()=>{
   generatingPdf=true;printButton.disabled=true;
   const originalLabel=printButton.innerHTML;
   printButton.textContent='Generando PDF…';
-  printFeedback.textContent='Preparando el mapa y las capas visibles…';
+  printFeedback.className='feedback pdfFeedback';
+  printFeedback.textContent='Preparando el mapa…';
   try{
     if(typeof html2canvas!=='function'||!window.jspdf?.jsPDF){
       throw new Error('No se cargaron las herramientas PDF. Comprobá tu conexión a internet y actualizá la página.');
@@ -761,7 +777,7 @@ printButton.onclick=async()=>{
     const stage=document.getElementById('map');
     await waitForMapTiles();
     await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-    printFeedback.textContent='Capturando mapa base, recorridos y paradas…';
+    printFeedback.textContent='Generando el archivo…';
     const canvas=await html2canvas(stage,{
       backgroundColor:'#ffffff',useCORS:true,allowTaint:false,logging:false,
       imageTimeout:15000,scale:Math.max(1,Math.min(2,1750/Math.max(1,stage.clientWidth))),
@@ -776,15 +792,16 @@ printButton.onclick=async()=>{
     const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:'a4',compress:true});
     const pageWidth=297,pageHeight=210;
     pdf.setFillColor(255,255,255);pdf.rect(0,0,pageWidth,pageHeight,'F');
-    pdf.setFillColor(16,63,67);pdf.rect(0,0,pageWidth,25,'F');
+    // Diseño compacto: título sobrio, mapa dominante y créditos en un pie fino.
+    pdf.setFillColor(16,63,67);pdf.rect(0,0,pageWidth,18,'F');
     const [from,to]=selectedDates();
     const vehicle=plate.value||'Todas las placas';
-    pdf.setFont('helvetica','bold');pdf.setTextColor(255,255,255);pdf.setFontSize(14);
-    pdf.text('Recolección · '+vehicle,11,12.5);
-    pdf.setFont('helvetica','normal');pdf.setFontSize(8.3);
-    pdf.text('Municipalidad de San José  |  '+from+' al '+to,11,19.5);
-    pdf.setFontSize(8);pdf.text('Mapa base: '+BASEMAP_DEFS[currentBasemapKey].label,286,18,{align:'right'});
-    const bx=9,by=29,bw=279,bh=158;
+    pdf.setFont('helvetica','bold');pdf.setTextColor(255,255,255);pdf.setFontSize(12);
+    pdf.text('Recolección · '+vehicle,9,8.5);
+    pdf.setFont('helvetica','normal');pdf.setFontSize(7.3);
+    pdf.text('San José  |  '+from+' — '+to,9,13.8);
+    pdf.setFontSize(7.2);pdf.text('Mapa base: '+BASEMAP_DEFS[currentBasemapKey].label,288,12,{align:'right'});
+    const bx=7,by=21,bw=283,bh=172;
     pdf.setFillColor(246,249,247);pdf.setDrawColor(184,205,197);
     pdf.rect(bx,by,bw,bh,'FD');
     const imgAspect=canvas.width/canvas.height;
@@ -795,20 +812,21 @@ printButton.onclick=async()=>{
     const data=canvas.toDataURL('image/jpeg',.92);
     pdf.addImage(data,'JPEG',ix,iy,iw,ih,undefined,'FAST');
     pdf.setDrawColor(172,191,184);pdf.rect(bx,by,bw,bh);
-    addPdfCompass(pdf,bx+bw-10,by+11);
-    if(legends.length)addPdfLegend(pdf,legends,bx+bw-58,by+bh-7-Math.min(94,14+legends.slice(0,12).reduce((n,r)=>n+Math.min(2,Math.ceil(r.label.length/37))*3.6+2,0)),55,95);
-    pdf.setTextColor(56,85,89);pdf.setFont('helvetica','normal');pdf.setFontSize(7.3);
-    const credit='Fuente: SatGeo, KML de Histórico de texto y reporte de paradas (21/10 al 03/11/2026); rutas programadas 2026, Municipalidad de San José.';
-    pdf.text(pdfWrap(pdf,credit,274),11,194);
-    pdf.setFontSize(6.6);
-    pdf.text('Recorridos GPS aproximados. Cartografía base: '+BASEMAP_DEFS[currentBasemapKey].credit+'.',11,201);
-    pdf.text('Escala gráfica y atribuciones del fondo incluidas en el mapa.',286,201,{align:'right'});
+    addPdfCompass(pdf,bx+bw-10,by+10);
+    if(legends.length)addPdfLegend(pdf,legends,bx+bw-54,by+bh-5-Math.min(66,12+legends.slice(0,10).reduce((n,r)=>n+Math.min(2,Math.ceil(r.label.length/39))*3.2+1.5,0)),50,66);
+    pdf.setTextColor(63,90,89);pdf.setFont('helvetica','normal');pdf.setFontSize(6.4);
+    const credit='Fuente: SatGeo y Municipalidad de San José. Recorridos GPS aproximados; cartografía: '+BASEMAP_DEFS[currentBasemapKey].credit+'.';
+    pdf.text(pdfWrap(pdf,credit,279).slice(0,2),9,198);
+    pdf.setFontSize(6);
+    pdf.text('Informe base: 21/10–03/11/2026',288,205,{align:'right'});
     const name=`Mapa_Recoleccion_${vehicle.replace(/[^A-Za-z0-9_-]/g,'_')}_${from}_${to}.pdf`;
-    printFeedback.textContent='Descargando '+name;
+    printFeedback.classList.add('is-ok');
+    printFeedback.textContent='Descarga iniciada.';
     pdf.save(name);
-    setTimeout(()=>{if(printFeedback.textContent.startsWith('Descargando'))printFeedback.textContent='PDF generado y enviado a Descargas.'},500);
+    setTimeout(()=>{if(printFeedback.textContent==='Descarga iniciada.'){printFeedback.textContent='';printFeedback.classList.remove('is-ok')}},4000);
   }catch(err){
     console.error('Error al generar el PDF:',err);
+    printFeedback.classList.add('is-error');
     printFeedback.textContent='No se pudo generar el PDF: '+(err?.message||String(err));
   }finally{
     generatingPdf=false;printButton.disabled=false;printButton.innerHTML=originalLabel;
