@@ -177,7 +177,8 @@ aside{padding:12px 12px 24px}
   </details>
   <p class="coverageNote" id="coverageInfo" role="status"></p>
   <div class="consultActions"><button id="fit" type="button">⌖ &nbsp;Acercar</button><button id="reset" class="secondary" type="button">↺ &nbsp;Limpiar</button></div>
-  <button id="printMap" type="button" class="consultPrint" title="En la ventana de impresión, elegí Guardar como PDF">↓ &nbsp;Descargar mapa PDF</button>
+  <button id="printMap" type="button" class="consultPrint" title="Generar y descargar PDF A4 horizontal directamente">↓ &nbsp;Descargar mapa PDF</button>
+  <div id="printFeedback" class="feedback" role="status" aria-live="polite" style="margin-top:5px"></div>
 </section>
 <section class="panelSection" aria-label="Resumen visible"><h2>Resumen de la vista</h2><div class="metric"><div class="card"><strong id="shortShown">0</strong><small>Paradas 10 min–&lt;4 h</small></div><div class="card"><strong id="parkingShown">0</strong><small>Otras permanencias ≥4 h</small></div><div class="card"><strong id="plantelShown">0</strong><small>Estancias ≥4 h en plantel</small></div><div class="card"><strong id="readingCount">0</strong><small>Lecturas GPS</small></div></div></section>
 <section id="capas" class="panelSection"><h2>02 · Capas del mapa</h2><p class="sectionHint">Activá lo que querés ver. Las capas que cargués se administran en Herramientas.</p>
@@ -254,7 +255,11 @@ aside{padding:12px 12px 24px}
     <div id="attrAllView" class="attributeContent" hidden><div class="attributeSearchRow"><label for="attributeSearch">Buscar registros</label><input type="search" id="attributeSearch" placeholder="Filtrar por zona, distrito, jornada…"><span id="attributeCount"></span></div><div class="attributeScroll attributeAllScroll"><table class="attributeFullTable"><thead id="attributeColumnHeaders"></thead><tbody id="attributeRows"></tbody></table></div><div class="attributeFooter"><span id="attributePaging"></span><div class="attributePageActions"><button id="attributePrev" type="button" class="secondary">← Anterior</button><button id="attributeNext" type="button" class="secondary">Siguiente →</button></div></div></div>
   </div>
 </section></div></div><div id="status" class="status" hidden>Se necesita internet para cargar el mapa base. Las posiciones GPS están incluidas en este archivo.</div>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://unpkg.com/shpjs@6.2.0/dist/shp.min.js"></script><script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/shpjs@6.2.0/dist/shp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
 // Escritor local de shapefiles de puntos y ZIP sin compresión.
 // No sube información a ningún servidor. Las coordenadas deben estar en WGS84.
 const shpEncoder = new TextEncoder();
@@ -582,7 +587,7 @@ function selectBasemap(key,{save=true}={}){
   if(basemapLayer && key===currentBasemapKey){renderBasemapControls();return;}
   const def=BASEMAP_DEFS[key];
   // Solo se reemplaza el mapa de fondo, NO las capas GPS ni polígonos.
-  const next=L.tileLayer(def.url,{attribution:def.attribution,maxZoom:def.maxZoom,maxNativeZoom:def.maxNativeZoom||19,keepBuffer:2});
+  const next=L.tileLayer(def.url,{attribution:def.attribution,maxZoom:def.maxZoom,maxNativeZoom:def.maxNativeZoom||19,keepBuffer:2,crossOrigin:true});
   next.addTo(map);next.bringToBack();
   if(def.filter && next.getContainer()) next.getContainer().style.filter=def.filter;
   const previous=basemapLayer;basemapLayer=next;currentBasemapKey=key;
@@ -676,15 +681,138 @@ function prepareMapSheet(){
  if(!entries.length){const empty=document.createElement('small');empty.textContent='No hay capas visibles con estos filtros';legend.append(empty)}
  document.getElementById('printFooter').textContent='Fuente: SatGeo · KML de Histórico de texto y reporte de paradas del 21/10 al 03/11 de 2026; capa de rutas programadas 2026 aportada por la Municipalidad. Recorridos GPS aproximados. Fondo: '+BASEMAP_DEFS[currentBasemapKey].label+' (© '+BASEMAP_DEFS[currentBasemapKey].credit+').';
 }
-let printView=null;const printButton=document.getElementById('printMap');
-function finishMapPrint(){if(!printView)return;const saved=printView;printView=null;document.body.classList.remove('mapPrint');map.invalidateSize({pan:false});map.setView(saved.center,saved.zoom,{animate:false});printButton.disabled=false}
-window.addEventListener('afterprint',finishMapPrint);
+// Exportación cartográfica real: PDF directo. No usa la ventana de impresión.
+const printButton=document.getElementById('printMap');
+const printFeedback=document.getElementById('printFeedback');
+let generatingPdf=false;
+function pdfHex(rgb){
+  const value=String(rgb||'').trim();
+  if(/^#[0-9a-f]{6}$/i.test(value))return value;
+  const match=value.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+  return match?'#'+match.slice(1,4).map(n=>Number(n).toString(16).padStart(2,'0')).join(''):'#087e86';
+}
+function pdfLegendEntries(){
+  prepareMapSheet();
+  return [...document.querySelectorAll('#printLegend .legendRow')].map(line=>({
+    color:pdfHex(line.querySelector('.swatch')?.style.backgroundColor),
+    label:line.querySelector('span:last-child')?.textContent||''
+  }));
+}
+function pdfWrap(pdf,text,width){return pdf.splitTextToSize(String(text||''),width)}
+function addPdfCompass(pdf,x,y){
+  pdf.setFillColor(255,255,255);pdf.setDrawColor(195,210,204);
+  pdf.roundedRect(x-6,y-7,12,21,2,2,'FD');
+  pdf.setFont('helvetica','bold');pdf.setFontSize(9);pdf.setTextColor(15,62,67);
+  pdf.text('N',x,y);
+  pdf.setLineWidth(.55);pdf.line(x,y+3,x,y+11);
+  pdf.line(x,y+3,x-1.8,y+6);pdf.line(x,y+3,x+1.8,y+6);
+}
+function addPdfLegend(pdf,entries,x,y,width,maxHeight){
+  // Leyenda sobre el fondo, con control de altura para no tapar el mapa completo.
+  const rows=entries.slice(0,12);
+  let cursor=y+6;const prepared=[];
+  for(const row of rows){
+    let lines=pdfWrap(pdf,row.label,width-13);
+    if(lines.length>2)lines=lines.slice(0,2);
+    prepared.push({color:row.color,lines});
+    cursor+=Math.max(5,lines.length*3.6+1);
+  }
+  const extra=Math.max(0,entries.length-rows.length);
+  const required=cursor-y+4+(extra?4:0);
+  const boxHeight=Math.min(maxHeight,required);
+  pdf.setFillColor(255,255,255);pdf.setDrawColor(202,217,211);
+  pdf.roundedRect(x,y,width,boxHeight,2.2,2.2,'FD');
+  pdf.setTextColor(26,58,62);pdf.setFont('helvetica','bold');pdf.setFontSize(8);
+  pdf.text('Leyenda',x+4,y+5.7);
+  let yy=y+11.2;pdf.setFont('helvetica','normal');pdf.setFontSize(6.5);
+  for(const row of prepared){
+    if(yy>y+boxHeight-5)break;
+    pdf.setFillColor(row.color);pdf.setDrawColor(row.color);
+    pdf.circle(x+5,yy-1.2,1.5,'FD');
+    pdf.setTextColor(35,68,73);
+    for(const line of row.lines){pdf.text(line,x+9,yy);yy+=3.55}
+    yy+=1.1;
+  }
+  if(extra && yy<y+boxHeight-2.5){
+    pdf.setFontSize(6);pdf.text('+'+extra+' clases adicionales',x+4,yy);
+  }
+}
+function waitForMapTiles(timeout=4500){
+  return new Promise(resolve=>{
+    if(!basemapLayer || !basemapLayer.isLoading())return resolve();
+    let finished=false;
+    const end=()=>{if(finished)return;finished=true;clearTimeout(timer);basemapLayer.off('load',end);resolve()};
+    const timer=setTimeout(end,timeout);
+    basemapLayer.once('load',end);
+  });
+}
 printButton.onclick=async()=>{
- if(printView)return;prepareMapSheet();printView={center:map.getCenter(),zoom:map.getZoom()};printButton.disabled=true;
- const tileWait=new Promise(resolve=>{let timer=setTimeout(resolve,1500);base.once('load',()=>{clearTimeout(timer);resolve()})});
- document.body.classList.add('mapPrint');await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
- map.invalidateSize({pan:false});await tileWait;
- try{window.print()}catch(err){finishMapPrint();alert('No se pudo abrir la impresión: '+(err.message||String(err)))}
+  if(generatingPdf)return;
+  generatingPdf=true;printButton.disabled=true;
+  const originalLabel=printButton.innerHTML;
+  printButton.textContent='Generando PDF…';
+  printFeedback.textContent='Preparando el mapa y las capas visibles…';
+  try{
+    if(typeof html2canvas!=='function'||!window.jspdf?.jsPDF){
+      throw new Error('No se cargaron las herramientas PDF. Comprobá tu conexión a internet y actualizá la página.');
+    }
+    // La exportación usa exactamente el mapa actual; no cambia filtros ni extensión.
+    const legends=pdfLegendEntries();
+    const stage=document.getElementById('map');
+    await waitForMapTiles();
+    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+    printFeedback.textContent='Capturando mapa base, recorridos y paradas…';
+    const canvas=await html2canvas(stage,{
+      backgroundColor:'#ffffff',useCORS:true,allowTaint:false,logging:false,
+      imageTimeout:15000,scale:Math.max(1,Math.min(2,1750/Math.max(1,stage.clientWidth))),
+      onclone:cloned=>{
+        // La tabla de atributos y el menú flotante no forman parte del mapa exportado.
+        cloned.querySelector('#basemapFloatMenu')?.setAttribute('hidden','');
+        cloned.querySelector('#attributeDock')?.setAttribute('hidden','');
+      }
+    });
+    if(!canvas.width||!canvas.height)throw new Error('El mapa no está listo para capturarse.');
+    const {jsPDF}=window.jspdf;
+    const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:'a4',compress:true});
+    const pageWidth=297,pageHeight=210;
+    pdf.setFillColor(255,255,255);pdf.rect(0,0,pageWidth,pageHeight,'F');
+    pdf.setFillColor(16,63,67);pdf.rect(0,0,pageWidth,25,'F');
+    const [from,to]=selectedDates();
+    const vehicle=plate.value||'Todas las placas';
+    pdf.setFont('helvetica','bold');pdf.setTextColor(255,255,255);pdf.setFontSize(14);
+    pdf.text('Recolección · '+vehicle,11,12.5);
+    pdf.setFont('helvetica','normal');pdf.setFontSize(8.3);
+    pdf.text('Municipalidad de San José  |  '+from+' al '+to,11,19.5);
+    pdf.setFontSize(8);pdf.text('Mapa base: '+BASEMAP_DEFS[currentBasemapKey].label,286,18,{align:'right'});
+    const bx=9,by=29,bw=279,bh=158;
+    pdf.setFillColor(246,249,247);pdf.setDrawColor(184,205,197);
+    pdf.rect(bx,by,bw,bh,'FD');
+    const imgAspect=canvas.width/canvas.height;
+    const pageAspect=bw/bh;
+    let iw,ih,ix,iy;
+    if(imgAspect>pageAspect){iw=bw;ih=bw/imgAspect;ix=bx;iy=by+(bh-ih)/2}
+    else{ih=bh;iw=bh*imgAspect;ix=bx+(bw-iw)/2;iy=by}
+    const data=canvas.toDataURL('image/jpeg',.92);
+    pdf.addImage(data,'JPEG',ix,iy,iw,ih,undefined,'FAST');
+    pdf.setDrawColor(172,191,184);pdf.rect(bx,by,bw,bh);
+    addPdfCompass(pdf,bx+bw-10,by+11);
+    if(legends.length)addPdfLegend(pdf,legends,bx+bw-58,by+bh-7-Math.min(94,14+legends.slice(0,12).reduce((n,r)=>n+Math.min(2,Math.ceil(r.label.length/37))*3.6+2,0)),55,95);
+    pdf.setTextColor(56,85,89);pdf.setFont('helvetica','normal');pdf.setFontSize(7.3);
+    const credit='Fuente: SatGeo, KML de Histórico de texto y reporte de paradas (21/10 al 03/11/2026); rutas programadas 2026, Municipalidad de San José.';
+    pdf.text(pdfWrap(pdf,credit,274),11,194);
+    pdf.setFontSize(6.6);
+    pdf.text('Recorridos GPS aproximados. Cartografía base: '+BASEMAP_DEFS[currentBasemapKey].credit+'.',11,201);
+    pdf.text('Escala gráfica y atribuciones del fondo incluidas en el mapa.',286,201,{align:'right'});
+    const name=`Mapa_Recoleccion_${vehicle.replace(/[^A-Za-z0-9_-]/g,'_')}_${from}_${to}.pdf`;
+    printFeedback.textContent='Descargando '+name;
+    pdf.save(name);
+    setTimeout(()=>{if(printFeedback.textContent.startsWith('Descargando'))printFeedback.textContent='PDF generado y enviado a Descargas.'},500);
+  }catch(err){
+    console.error('Error al generar el PDF:',err);
+    printFeedback.textContent='No se pudo generar el PDF: '+(err?.message||String(err));
+  }finally{
+    generatingPdf=false;printButton.disabled=false;printButton.innerHTML=originalLabel;
+  }
 };
 for(const id of ['week','plate','from','to','showOriginals','route','showStops','parking','plantel'])document.getElementById(id).addEventListener('change',()=>{if(id==='week'){if(week.value==='history'){let [a,b]=historyDefaults();document.getElementById('from').value=a;document.getElementById('to').value=b}document.getElementById('dateFilters').open=week.value==='history';clampDates()}draw();if(id==='week'||id==='plate')fit();scheduleWorkspaceSave()});ranges.addEventListener('change',()=>{draw();scheduleWorkspaceSave()});
 document.getElementById('fit').onclick=fit;
