@@ -16,213 +16,33 @@ label{display:block;font-weight:650;margin:12px 0 5px}select,input[type=date],in
 #days{display:flex;flex-wrap:wrap;gap:5px;margin:7px 0}.day{font-size:11px;padding:3px 7px;border-radius:6px;color:white}.leaflet-popup-content{line-height:1.5}.status{position:absolute;top:84px;right:12px;z-index:600;background:white;padding:8px 11px;border-radius:8px;box-shadow:0 2px 10px #0002;font-size:12px;max-width:260px}
 .northBadge{position:absolute;top:16px;right:16px;z-index:650;background:#fffefa;border:1px solid #bdd1ca;border-radius:11px;padding:5px 10px;text-align:center;box-shadow:0 2px 10px #19383b26;pointer-events:none;color:#123f43;font-weight:850;line-height:1}.northBadge span{font-size:22px;display:block;margin-top:2px}.printTitle,.printLegend,.printFooter{display:none}
 body.mapPrint{background:#fff}body.mapPrint header,body.mapPrint aside,body.mapPrint .status{display:none}body.mapPrint .layout{display:block;flex:none}body.mapPrint .mapStage{width:min(277mm,100vw);height:min(180mm,100vh);margin:0 auto;border:1px solid #91aba5;print-color-adjust:exact;-webkit-print-color-adjust:exact}body.mapPrint .printTitle,body.mapPrint .printLegend,body.mapPrint .printFooter{display:block;position:absolute;z-index:650;background:#fffffff0;border:1px solid #cbdcd6;border-radius:9px;box-shadow:0 2px 9px #123f4322;padding:9px 11px;color:#17373d}body.mapPrint .printTitle{left:16px;top:15px;max-width:60%}body.mapPrint .printTitle strong{font-size:17px;display:block}body.mapPrint .printTitle small{font-size:11px;display:block;margin-top:3px}body.mapPrint .printLegend{right:16px;bottom:32px;font-size:11px;max-width:220px;line-height:1.45}body.mapPrint .printLegend b{display:block;margin-bottom:4px}body.mapPrint .printLegend .legendRow{display:flex;gap:7px;align-items:center;margin:3px 0}body.mapPrint .printFooter{left:16px;bottom:32px;max-width:50%;font-size:10px}body.mapPrint .leaflet-control-zoom{display:none}
-
-/* Consulta de atributos: panel inferior acoplado al mapa, estilo tabla de ArcGIS. */
-.attributeDock[hidden],.attributeContent[hidden],.attributeBody[hidden]{display:none!important}
-.attributeDock{position:absolute;left:14px;right:14px;bottom:15px;z-index:680;display:flex;flex-direction:column;max-height:min(54vh,510px);background:#fff;border:1px solid #bed7d1;border-radius:15px;box-shadow:0 8px 34px #092a3260;overflow:hidden;color:#163c42;font-size:13px}
-.attributeDock.isMinimized{max-height:100px}
-.attributeTop{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 15px;background:#f1f7f4;border-bottom:1px solid #d3e4de}
-.attributeHeading{display:flex;flex-direction:column;gap:1px;min-width:0}.attributeHeading strong{font-size:15px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.attributeHeading small{color:#5c797b}.attributeEyebrow{color:#08767c;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
-.attributeTopActions{display:flex;gap:5px;flex:none}.attributeTopActions button{font-size:15px;min-width:36px;padding:6px 8px}
-.attributeBody{display:flex;flex-direction:column;min-height:0;overflow:hidden}.attributeTabs{display:flex;gap:8px;padding:9px 12px 0;border-bottom:1px solid #d9e7e2}.attributeTab{border-radius:8px 8px 0 0;color:#526a6e;background:transparent;padding:8px 13px;border-bottom:3px solid transparent}.attributeTab:hover{background:#eff7f4}.attributeTab.active{border-bottom-color:#087e86;color:#075d65;background:#f4f9f7}
-.attributeContent{display:flex;flex-direction:column;min-height:0;overflow:hidden}.attributeScroll{overflow:auto;min-height:70px;max-height:300px;scrollbar-color:#9bb8b1 transparent}
-.attributeDock table{border-collapse:collapse;width:100%;font-size:12px}.attributeDock th,.attributeDock td{padding:8px 11px;text-align:left;border-bottom:1px solid #e4ece8;vertical-align:top}.attributeDock thead th{position:sticky;top:0;background:#e9f3ef;color:#264f51;z-index:1}.attributeDetailTable th:first-child,.attributeDetailTable td:first-child{width:38%;font-weight:700;color:#365960}.attributeDock td{overflow-wrap:anywhere}.attributeDock tbody tr:nth-child(even){background:#fbfdfc}
-.attributeFullTable{min-width:max-content}.attributeFullTable th,.attributeFullTable td{white-space:nowrap;max-width:360px;overflow:hidden;text-overflow:ellipsis}.attributeFullTable tbody tr{cursor:pointer}.attributeFullTable tbody tr:hover{background:#e6f4f0}.attributeFullTable tr.selectedRow{background:#d8f4e9!important;outline:1px solid #4da890;outline-offset:-1px}
-.attributeFooter{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 12px;color:#5c7578;font-size:11px;border-top:1px solid #e0eae6;background:#fbfdfb}.attributeFooter button{font-size:11px;padding:7px 10px}.attributePageActions{display:flex;gap:6px}
-.attributeSearchRow{display:flex;align-items:center;gap:10px;padding:10px 12px}.attributeSearchRow label{margin:0;flex:none}.attributeSearchRow input{flex:1;width:100%;min-width:70px;background:#fff;border:1px solid #bcd1c9;border-radius:8px;padding:8px;font:inherit}.attributeSearchRow span{white-space:nowrap;color:#587375;font-size:11px}
-.symbolPanelTitle{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}.symbolPanelTitle h3{margin:0}.symbolEditToggle{font-size:12px;padding:9px 11px}.symbolEditToggle.editing{background:#a95715;color:#fff}.symbolLockStatus{font-size:12px;color:#416761;background:#edf6f2;border:1px solid #cde0d9;border-radius:9px;padding:10px;margin:10px 0 12px}.symbolLockStatus.editing{background:#fff4e5;color:#81501b;border-color:#f0d6af}
-.symbolPanel input:disabled,.symbolPanel select:disabled{cursor:not-allowed;opacity:.62}.symbolPanel input[type=color]:disabled{opacity:.8}
-/* En consulta, los nombres no son cuadros de texto: solo lectura real. */
-.symbolClass .symbolLabelReadOnly{display:block;min-width:0;padding:7px 9px;overflow-wrap:anywhere;background:#f2f7f4;border:1px solid transparent;border-radius:7px;color:#284b4f;user-select:text}
-.symbolClass .symbolVisibleReadOnly{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;color:#0b7b82;font-weight:800;font-size:17px}
-.symbolClass .symbolVisibleReadOnly.isHidden{color:#95a7a2}
-.symbolClass input[type=color]{cursor:pointer}
-.symbolPanel:not(.editMode) .symbolClass input[type=text],.symbolPanel:not(.editMode) .symbolClass input[type=checkbox]{display:none}
-body.mapPrint .attributeDock{display:none!important}
-@media(max-width:800px){.attributeDock{left:8px;right:8px;bottom:8px;max-height:44vh}.attributeScroll{max-height:220px}.attributeTop{padding:9px 11px}.attributeTabs{gap:0}.attributeTab{padding:7px 10px;font-size:12px}.attributeSearchRow{flex-wrap:wrap}.attributeSearchRow input{flex-basis:100%;order:3}.attributeHeading strong{font-size:13px}}
-
 @page{size:A4 landscape;margin:10mm}@media print{html,body{width:277mm;height:190mm;margin:0;overflow:hidden}body.mapPrint .mapStage{width:277mm;height:180mm;margin:0;border:1px solid #91aba5}body.mapPrint .printTitle,body.mapPrint .printLegend,body.mapPrint .printFooter,body.mapPrint .northBadge{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
 @media(max-width:800px){header{min-height:60px;align-items:flex-start;flex-wrap:wrap;padding:10px 14px}header nav{justify-content:flex-start}.layout{display:flex;flex-direction:column;height:auto}.mapStage{height:53vh;flex:none;order:1}aside{max-height:47vh;order:2;padding:12px}.panelSection{padding:15px}}
-
-/* Selector de mapas base: independiente de la edición de simbología. */
-.basemapSection{border:1px solid #d6e8e0;border-radius:13px;background:#f7faf8;padding:13px 11px;margin:6px 0 17px}
-.basemapSectionTitle{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:5px;color:#173f43}
-.basemapSectionTitle strong{font-size:14px}.basemapSectionTitle span{font-size:11px;font-weight:650;color:#477d78;background:#e4f1eb;border-radius:20px;padding:3px 7px}
-.basemapSection .sectionHint{margin:0 0 11px}
-.basemapGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-button.basemapOption{padding:6px;display:flex;align-items:center;gap:8px;min-height:58px;background:#fff;border:1px solid #d1ded8;border-radius:11px;color:#23454b;box-shadow:0 1px 5px #102c2510;text-align:left;min-width:0;font-weight:600;transition:border-color .15s,box-shadow .15s,background .15s}
-button.basemapOption:hover{border-color:#6aa5a0;background:#f6fcf8;filter:none}
-button.basemapOption[aria-pressed=true]{border-color:#087e86;background:#ebf7f4;box-shadow:0 0 0 2px #087e8623}
-.basemapThumb{width:45px;height:42px;border-radius:7px;flex:none;position:relative;overflow:hidden;border:1px solid #bfcfca;background:#f0eee4}
-.basemapThumb::before,.basemapThumb::after{content:"";position:absolute;left:-12%;top:46%;width:145%;height:6px;background:#ffffffa8;transform:rotate(-29deg);border:1px solid #84968c24}
-.basemapThumb::after{top:20%;transform:rotate(42deg);height:4px}
-.basemapThumb.calles{background:linear-gradient(115deg,#d2e1c7 0 30%,#f6e9c9 30% 75%,#bcdadb 75%)}
-.basemapThumb.claro{background:linear-gradient(135deg,#fdfdfd,#e4e8e8)}
-.basemapThumb.oscuro{background:linear-gradient(115deg,#151d25,#353f4b)}
-.basemapThumb.oscuro::before,.basemapThumb.oscuro::after{background:#637585}
-.basemapThumb.satelite{background:linear-gradient(128deg,#28442d 0 30%,#6c8460 31% 40%,#4c5846 41% 65%,#77815d 65%)}
-.basemapThumb.satelite::before,.basemapThumb.satelite::after{background:#a6ab9a80}
-.basemapThumb.topografico{background:repeating-radial-gradient(ellipse at 5% 85%,#bfd7b5 0 5px,#e7e3b3 6px 9px,#b2c59a 10px 11px)}
-.basemapThumb.osm{background:linear-gradient(110deg,#d7e9ce 0 35%,#eee8d7 35% 75%,#a3d7e0 75%)}
-.basemapThumb.monocromo{background:linear-gradient(115deg,#e7e7e7 0 45%,#c9c9c9 45%)}
-.basemapName{min-width:0;overflow-wrap:anywhere;font-size:12px;line-height:1.25}
-.basemapFootnote{font-size:11px;color:#71817d;line-height:1.45;margin:9px 2px 0}
-.basemapFloat{position:absolute;z-index:660;right:14px;top:81px;display:flex;flex-direction:column;align-items:flex-end;max-width:min(335px,calc(100% - 28px))}
-button.basemapFloatToggle{border:1px solid #bdd4cd;background:#fff;color:#164950;box-shadow:0 3px 12px #0e353c38;padding:10px 12px;font-size:12px;border-radius:10px;display:flex;align-items:center;gap:9px;min-height:41px}
-button.basemapFloatToggle:hover{background:#eff8f4;filter:none}
-.basemapFloatMenu[hidden]{display:none!important}
-.basemapFloatMenu{margin-top:7px;width:min(335px,calc(100vw - 30px));background:white;border:1px solid #bed3cd;border-radius:13px;padding:12px;box-shadow:0 8px 34px #142d3440}
-.basemapFloatMenu>strong{display:block;color:#1c4246;font-size:13px;margin-bottom:10px}
-body.mapPrint .basemapFloat{display:none!important}
-@media(max-width:800px){.basemapFloat{top:66px;right:9px}.basemapFloatMenu{max-height:38vh;overflow:auto}.basemapGrid{gap:6px}.basemapSection{margin-bottom:12px}}
-
-/* Mapa base: menú dentro de la barra superior, sin superposición sobre el mapa. */
-header{z-index:2000}
-header nav{align-items:center}
-header nav .basemapFloat{position:relative;display:block;z-index:1;top:auto;right:auto;max-width:none;align-self:auto}
-header nav button.basemapFloatToggle{font:inherit;font-size:12px;font-weight:650;line-height:1.1;color:#fff;background:transparent;box-shadow:none;border:1px solid #6ca8a3;border-radius:9px;padding:8px 11px;min-height:36px;gap:6px;white-space:nowrap}
-header nav button.basemapFloatToggle:hover,header nav button.basemapFloatToggle[aria-expanded="true"]{background:#23666a;filter:none}
-header nav button.basemapFloatToggle:focus-visible{outline:2px solid #eead37;outline-offset:2px}
-header nav .basemapFloatMenu{position:absolute;top:calc(100% + 10px);right:0;margin:0;width:328px;max-width:calc(100vw - 24px);max-height:min(490px,calc(100dvh - 85px));overflow-y:auto;box-shadow:0 12px 32px #142d3440;text-align:left}
-header nav .basemapFloatMenu .basemapGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-header nav .basemapFloatMenu .basemapOption{white-space:normal}
-@media(max-width:800px){header nav .basemapFloat{top:auto;right:auto}header nav .basemapFloatMenu{max-height:55vh;right:0}}
-@media(max-width:460px){header nav{width:100%;justify-content:flex-start}header nav .basemapFloatMenu{left:0;right:auto;max-width:calc(100vw - 28px)}header nav button.basemapFloatToggle{font-size:11px;padding:8px 9px}}
-
-/* Simbología minimalista: un acordeón cerrado por defecto, separado de las capas. */
-#symbolPanel.symbolPanel{display:block;margin-top:16px;padding:0;border:1px solid #d7e6df;border-radius:13px;background:#fcfefd;overflow:hidden;box-shadow:none;scroll-margin-top:14px}
-#symbolPanel>.symbolPanelSummary{display:flex;align-items:center;gap:10px;cursor:pointer;padding:13px 12px;min-height:62px;list-style:none;color:#184c4e;user-select:none}
-#symbolPanel>.symbolPanelSummary::-webkit-details-marker{display:none}
-#symbolPanel>.symbolPanelSummary:hover{background:#f0f7f3}
-#symbolPanel>.symbolPanelSummary:focus-visible{outline:2px solid #087e86;outline-offset:-3px}
-#symbolPanel .symbolSummaryIcon{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:9px;background:#e8f3ef;color:#087a83;font-size:19px}
-#symbolPanel .symbolSummaryText{display:flex;flex:1;flex-direction:column;min-width:0;gap:2px}
-#symbolPanel .symbolSummaryText strong{font-size:14px;line-height:1.25}
-#symbolPanel .symbolSummaryText small{font-size:11px;font-weight:450;color:#698180}
-#symbolPanel .symbolChevron{font-size:22px;line-height:1;color:#678481;transition:transform .15s ease}
-#symbolPanel[open] .symbolChevron{transform:rotate(180deg)}
-#symbolPanel[open]>.symbolPanelSummary{border-bottom:1px solid #dce8e3;background:#f7fbf9}
-#symbolPanel .symbolPanelContent{padding:14px 12px 13px}
-#symbolPanel .symbolLayerLabel{font-size:12px;color:#516f72;margin:0 0 6px}
-#symbolPanel #symbolLayer{padding:9px 10px;min-width:0;background:white}
-#symbolPanel .symbolPanelToolbar{display:flex;flex-direction:column;gap:9px;align-items:stretch;margin:11px 0 12px}
-#symbolPanel .symbolLockStatus{display:block;min-width:0;font-size:11px;line-height:1.35;margin:0;padding:8px 10px;background:#f1f7f4;border:1px solid #e0ede5;border-radius:8px;color:#52716f}
-#symbolPanel .symbolLockStatus.editing{background:#fff5e9;color:#89561f;border-color:#f3dec1}
-#symbolPanel .symbolEditToggle{width:100%;padding:8px 10px;font-size:12px}
-#symbolPanel .symbolConfigFold{margin:10px 0 12px;border:1px solid #e2ece8;border-radius:10px;background:#fff;overflow:hidden}
-#symbolPanel .symbolConfigFold>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:10px 11px;cursor:pointer;color:#3a6666;font-weight:650;font-size:12px}
-#symbolPanel .symbolConfigFold>summary::-webkit-details-marker{display:none}
-#symbolPanel .symbolConfigFold>summary::after{content:'⌄';font-size:18px;line-height:1;color:#668885}
-#symbolPanel .symbolConfigFold[open]>summary::after{transform:rotate(180deg)}
-#symbolPanel .symbolConfigFold[open]>summary{border-bottom:1px solid #e5eeea}
-#symbolPanel .symbolConfigBody{padding:10px 11px 12px}
-#symbolPanel .symbolGrid{gap:9px 8px}
-#symbolPanel .symbolGrid label{font-size:11px;margin:0;color:#536f72}
-#symbolPanel .symbolGrid select{margin-top:5px;padding:8px 5px;font-size:12px}
-#symbolPanel .symbolMeta{margin:8px 0 8px;font-size:11px;color:#607c7b}
-#symbolPanel .symbolClasses{margin:8px 0;max-height:320px;background:white;border-radius:9px}
-#symbolPanel .symbolClass{grid-template-columns:19px 36px minmax(0,1fr) 24px;gap:8px;padding:8px 7px;font-size:12px}
-#symbolPanel .symbolClass .symbolLabelReadOnly{padding:5px 1px;background:transparent;border:none;color:#24484d}
-#symbolPanel .symbolClass input[type=text]{padding:5px 6px;font-size:12px}
-#symbolPanel .symbolClass input[type=color]{height:28px;width:35px;border-radius:7px}
-#symbolPanel #symbolEditor>.sectionHint{margin:10px 0 0;font-size:11px;line-height:1.4;color:#81908f}
-@media(max-width:800px){#symbolPanel .symbolPanelContent{padding:13px 11px}#symbolPanel .symbolClass{gap:6px}}
-
-/* Panel de consulta compacto: campos alineados, fechas opcionales y acciones discretas. */
-.layout{grid-template-columns:minmax(310px,348px) minmax(0,1fr)}
-aside{padding:12px 12px 24px}
-.sidebarLead{padding:4px 7px 11px}
-.sidebarLead .eyebrow{font-size:10px;letter-spacing:.13em;color:#598783}
-.sidebarLead h1{font-size:19px;line-height:1.18;margin:5px 0 0;letter-spacing:-.025em}
-#consulta.consultCompact{padding:14px 14px 13px;border-radius:13px;box-shadow:0 2px 8px #173c3e08}
-#consulta .consultHeader{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:12px}
-#consulta .consultHeader h2{margin:0;font-size:15px;line-height:1.3;letter-spacing:-.01em}
-#consulta .consultHeaderTag{font-size:10px;color:#64817e;background:#eef5f1;border-radius:99px;padding:4px 7px;white-space:nowrap}
-#consulta .consultRow{display:grid;grid-template-columns:55px minmax(0,1fr);align-items:center;gap:9px;margin:0 0 9px}
-#consulta .consultRow label{margin:0;font-size:12px;color:#31575a;line-height:1.2}
-#consulta .consultRow select{display:block;min-width:0;width:100%;height:36px;max-width:100%;font-size:12px;padding:7px 8px;border-color:#d0dfd8;background-color:#fff;border-radius:8px;color:#24444c;text-overflow:ellipsis}
-#consulta .dateFilters{border-top:1px solid #ebf0ed;margin:9px 0 0;padding-top:1px}
-#consulta .dateFilters summary{display:flex;align-items:center;justify-content:space-between;gap:7px;cursor:pointer;color:#48706e;font-size:11px;min-height:30px;padding:5px 3px;list-style:none;border-radius:5px}
-#consulta .dateFilters summary::-webkit-details-marker{display:none}
-#consulta .dateFilters summary:hover{color:#087e86;background:#f4f9f6}
-#consulta .dateFilters summary small{font-size:10px;color:#829491;display:inline-flex;align-items:center;gap:5px}
-#consulta .dateFilters summary small::after{content:'⌄';font-size:15px;line-height:1;color:#5a7976}
-#consulta .dateFilters[open] summary small::after{transform:rotate(180deg)}
-#consulta .dateFields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:5px 2px 8px}
-#consulta .dateFields>div{min-width:0}
-#consulta .dateFields label{font-size:10px;font-weight:650;line-height:1;margin:0 0 5px;color:#5b7678}
-#consulta .dateFields input[type=date]{min-width:0;width:100%;font-size:11px;height:34px;padding:5px 6px;border-radius:7px;border:1px solid #c9dcd3;background:#fff;color:#2c4c51}
-#consulta .coverageNote{background:transparent;border-left:2px solid #b8d7cb;margin:6px 0 10px;padding:2px 0 2px 8px;color:#66817d;font-size:10.5px;line-height:1.4}
-#consulta .consultActions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:0}
-#consulta .consultActions button{min-width:0;min-height:34px;padding:7px 8px;font-size:12px;border-radius:8px;line-height:1.2}
-#consulta .consultPrint{display:block;width:100%;background:transparent;border:1px solid #e0eae5;color:#436966;margin-top:7px;min-height:32px;padding:6px 9px;font-size:11px;font-weight:600;border-radius:8px}
-#consulta .consultPrint:hover{background:#eaf4ef;color:#174b4f}
-/* Descarga de mapa más discreta: una acción, sin una tarjeta de aviso permanente. */
-#consulta .consultExportRow{margin-top:9px;display:flex;align-items:center;justify-content:space-between;gap:8px}
-#consulta .consultExportRow .consultPrint{margin:0;display:inline-flex;justify-content:center;align-items:center;gap:8px;flex:none;width:auto;max-width:100%;border:1px solid #d0dfd7;background:#f5f9f7;color:#15585a;min-height:30px;padding:6px 11px;border-radius:8px;font-weight:650;font-size:11.5px;box-shadow:none;transition:background .12s,border-color .12s}
-#consulta .consultExportRow .consultPrint:hover{background:#e8f5ee;border-color:#9ac7ba}
-#consulta .consultExportRow .consultPrint:disabled{background:#f6f8f7;opacity:.7;cursor:wait}
-#consulta .pdfDownloadIcon{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:5px;background:#e2efe9;color:#12777a;font-size:16px;line-height:1}
-#consulta .pdfFormat{font-size:10px;color:#8ba19a;white-space:nowrap}
-#consulta .pdfFeedback{margin:0;min-height:0;font-size:10.5px;line-height:1.45;color:#356b61;white-space:normal}
-#consulta .pdfFeedback:not(:empty){display:block;margin-top:8px;padding:7px 9px;border-radius:7px;background:#eef7f3;border:1px solid #d8eee4}
-#consulta .pdfFeedback.is-error{color:#8b4427;background:#fff5eb;border-color:#f3dfc8}
-#consulta .pdfFeedback.is-ok{color:#1c6352;background:#eff8f2;border-color:#d6ebe1}
-
-@media(max-width:800px){.layout{display:flex}aside{padding:10px}.sidebarLead{padding:3px 5px 10px}#consulta.consultCompact{padding:12px}}
-@media(max-width:360px){#consulta .consultHeaderTag{display:none}#consulta .consultRow{grid-template-columns:48px minmax(0,1fr)}}
 </style></head><body>
-<header><div><b>Recolección · recorridos GPS y paradas</b><br><small>Municipalidad de San José · informe base: 21 oct. al 3 nov. de 2026</small></div><nav aria-label="Secciones"><a href="#consulta">Consultar</a><a href="#capas">Capas</a><div class="basemapFloat" id="basemapFloat"><button type="button" class="basemapFloatToggle" id="basemapFloatToggle" aria-controls="basemapFloatMenu" aria-expanded="false">▧ <span id="basemapFloatLabel">Mapa base: Calles</span> <span aria-hidden="true">⌄</span></button>
-<div class="basemapFloatMenu" id="basemapFloatMenu" hidden><strong>Seleccioná el mapa base</strong><div class="basemapGrid" id="basemapFloatOptions" role="group" aria-label="Cambiar fondo del mapa"></div></div></div><a href="#resultados">Resultados</a><a href="#tools" id="toolsLink">Herramientas · beta</a></nav></header>
+<header><div><b>Recolección · recorridos GPS y paradas</b><br><small>Municipalidad de San José · informe base: 21 oct. al 3 nov. de 2026</small></div><nav aria-label="Secciones"><a href="#consulta">Consultar</a><a href="#capas">Capas</a><a href="#resultados">Resultados</a><a href="#tools" id="toolsLink">Herramientas · beta</a></nav></header>
 <div class="layout"><aside>
-<div class="sidebarLead"><span class="eyebrow">VISOR DE RECOLECCIÓN</span><h1>Recorridos GPS</h1></div>
-<section id="consulta" class="panelSection consultCompact" aria-labelledby="consultaTitulo">
-  <div class="consultHeader"><h2 id="consultaTitulo">01 · Consultar</h2><span class="consultHeaderTag">Filtros del mapa</span></div>
-  <div class="consultRow"><label for="week">Periodo</label><select id="week"><option value="1">Semana 1 · 21 al 27 de octubre</option><option value="2">Semana 2 · 28 de octubre al 3 de noviembre</option><option value="history">Histórico GPS · fechas libres</option></select></div>
-  <div class="consultRow"><label for="plate">Camión</label><select id="plate"></select></div>
-  <details class="dateFilters" id="dateFilters">
-    <summary><span>▦ &nbsp;Fechas específicas</span><small>Opcional</small></summary>
-    <div class="dateFields">
-      <div><label for="from">Desde</label><input type="date" id="from"></div>
-      <div><label for="to">Hasta</label><input type="date" id="to"></div>
-    </div>
-  </details>
-  <p class="coverageNote" id="coverageInfo" role="status"></p>
-  <div class="consultActions"><button id="fit" type="button">⌖ &nbsp;Acercar</button><button id="reset" class="secondary" type="button">↺ &nbsp;Limpiar</button></div>
-  <div class="consultExportRow">
-    <button id="printMap" type="button" class="consultPrint" title="Descargar el mapa visible en formato PDF A4 horizontal"><span aria-hidden="true" class="pdfDownloadIcon">↓</span><span>Descargar PDF</span></button>
-    <span class="pdfFormat">A4 · horizontal</span>
-  </div>
-  <div id="printFeedback" class="feedback pdfFeedback" role="status" aria-live="polite"></div>
+<div class="sidebarLead"><span class="eyebrow">Visor de recolección</span><h1>Explorá el recorrido</h1><p>Elegí la semana y el camión. Revisá sus lecturas GPS y las paradas del informe.</p></div>
+<section id="consulta" class="panelSection"><h2>01 · Consultar</h2><p class="sectionHint">Podés pasar de las dos semanas del informe a fechas GPS libres.</p>
+<label for="week">Periodo</label><select id="week"><option value="1">Semana 1 · 21 al 27 de octubre</option><option value="2">Semana 2 · 28 de octubre al 3 de noviembre</option><option value="history">Histórico GPS · fechas libres</option></select>
+<label for="plate">Camión</label><select id="plate"></select>
+<label>Fechas para consultar</label><div class="row"><input type="date" id="from" aria-label="Desde"><input type="date" id="to" aria-label="Hasta"></div><div class="note" id="coverageInfo" role="status"></div>
+<div class="actions"><button id="fit">Acercar al recorrido</button><button id="reset" class="secondary">Limpiar filtros</button></div>
+<div class="actions"><button id="printMap" type="button" class="secondary">⬇ Descargar mapa (PDF)</button></div>
+<p class="sectionHint">En la ventana que se abre, elegí «Guardar como PDF».</p>
 </section>
-<section class="panelSection" aria-label="Resumen visible"><h2>Resumen de la vista</h2><div class="metric"><div class="card"><strong id="shortShown">0</strong><small>Paradas 10 min–&lt;4 h</small></div><div class="card"><strong id="parkingShown">0</strong><small>Otras permanencias ≥4 h</small></div><div class="card"><strong id="plantelShown">0</strong><small>Estancias ≥4 h en plantel</small></div><div class="card"><strong id="readingCount">0</strong><small>Lecturas GPS</small></div></div></section>
+<section class="panelSection" aria-label="Resumen visible"><h2>Resumen de la vista</h2><div class="metric"><div class="card"><strong id="shortShown">0</strong><small>Paradas e indicios 1 min–&lt;4 h</small></div><div class="card"><strong id="parkingShown">0</strong><small>Otras permanencias ≥4 h</small></div><div class="card"><strong id="plantelShown">0</strong><small>Estancias ≥4 h en plantel</small></div><div class="card"><strong id="readingCount">0</strong><small>Lecturas GPS</small></div></div></section>
 <section id="capas" class="panelSection"><h2>02 · Capas del mapa</h2><p class="sectionHint">Activá lo que querés ver. Las capas que cargués se administran en Herramientas.</p>
 <label class="check"><input type="checkbox" id="showOriginals" checked><b>Mostrar datos GPS y paradas</b></label>
 <label class="check"><input type="checkbox" id="route" checked><span class="swatch" style="background:#2451a3"></span>Recorrido GPS</label><div id="days"></div><p id="routeInfo" class="sectionHint"></p>
-<label class="check"><input type="checkbox" id="showStops" checked><span class="swatch" style="background:#22a5bb"></span>Paradas de 10 min a menos de 4 h</label>
-<div class="miniHeading">Intervalos de paradas</div><div id="ranges"></div>
+<label class="check"><input type="checkbox" id="showStops" checked><span class="swatch" style="background:#22a5bb"></span>Paradas e indicios desde 1 min hasta menos de 4 h</label>
+<div class="miniHeading">Intervalos de detención</div><div id="ranges"></div><p id="gpsEstimateInfo" class="sectionHint" role="status">Las detenciones de 1 a menos de 10 minutos se estiman con lecturas GPS; elegí una placa.</p>
 <label class="check"><input type="checkbox" id="parking" checked><span class="swatch" style="background:#8035a0"></span>Otras permanencias de 4 h o más</label>
 <label class="check"><input type="checkbox" id="plantel" checked><span class="swatch" style="background:#12679a;border-radius:3px"></span>Planteles de Pavas y San José</label>
-<div class="planCard"><label class="check"><input type="checkbox" id="showPlan"><b>Rutas programadas de recolección 2026</b></label><p id="planInfo">114 polígonos con zona, distrito, jornada y frecuencia. Hacé clic sobre una zona para abrir su tabla de atributos; sin horas exactas de inicio ni fin.</p><button id="planSymbol" class="secondary" type="button">🎨 Simbología de estas rutas</button> <button id="planAttributes" class="secondary" type="button">▦ Tabla de atributos</button> <button id="restorePlan" class="secondary" type="button" hidden>Restaurar rutas</button></div>
-<details id="symbolPanel" class="symbolPanel">
-  <summary class="symbolPanelSummary" aria-label="Desplegar u ocultar simbología de capas">
-    <span class="symbolSummaryIcon" aria-hidden="true">◈</span>
-    <span class="symbolSummaryText"><strong>Simbología de capas</strong><small>Colores, categorías e intervalos</small></span>
-    <span class="symbolChevron" aria-hidden="true">⌄</span>
-  </summary>
-  <div class="symbolPanelContent">
-    <label class="symbolLayerLabel" for="symbolLayer">Capa</label>
-    <select id="symbolLayer"></select>
-    <div class="symbolPanelToolbar">
-      <span id="symbolLockStatus" class="symbolLockStatus" role="status">🔒 Nombres protegidos · colores libres</span>
-      <button id="symbolEditToggle" class="secondary symbolEditToggle" type="button" aria-pressed="false">✎ Activar edición</button>
-    </div>
-    <div id="symbolEditor"></div>
-  </div>
-</details>
+<div class="planCard"><label class="check"><input type="checkbox" id="showPlan"><b>Rutas programadas de recolección 2026</b></label><p id="planInfo">114 polígonos con zona, distrito, jornada y frecuencia. No incluyen hora exacta de inicio ni de fin.</p><button id="planSymbol" class="secondary" type="button">🎨 Simbología de estas rutas</button> <button id="restorePlan" class="secondary" type="button" hidden>Restaurar rutas</button></div>
+<div id="symbolPanel" class="symbolPanel"><h3>Simbología de capas</h3><p class="sectionHint">Elegí una capa y un campo. Valores únicos sirve para códigos como ZONA; intervalos sirve para cantidades como PREDIOS.</p><label for="symbolLayer">Capa para simbolizar</label><select id="symbolLayer"></select><div id="symbolEditor"></div></div>
 </section>
 <section id="resultados" class="panelSection"><h2>03 · Resultados</h2><p class="sectionHint">Abrí una lista para localizar un registro en el mapa.</p>
-<details class="moreInfo"><summary>Paradas visibles</summary><div class="list" id="items"></div></details>
+<details class="moreInfo"><summary>Paradas e indicios visibles</summary><div class="list" id="items"></div></details>
 <details class="moreInfo"><summary>Estancias ≥4 h en planteles</summary><div class="list" id="stays"></div></details>
 </section>
 <details id="tools" class="panelSection toolShelf"><summary><span><strong>04 · Herramientas experimentales</strong><small>Importar, exportar y guardar archivos</small></span><span class="beta">Beta</span></summary><div class="toolBody">
@@ -230,7 +50,7 @@ aside{padding:12px 12px 24px}
 <details class="toolAccordion" id="toolSatgeo"><summary>SatGeo y KML <span>· actualizar recorridos</span></summary><div>
 <p><a class="ext" href="https://gpspace.app/satgeo/SingIn.aspx" target="_blank" rel="noopener noreferrer">Abrir SatGeo en otra pestaña ↗</a></p>
 <label for="gpsFile">Cargar KML de Histórico de texto</label><input type="file" id="gpsFile" accept=".kml" multiple><div id="gpsFeedback" class="feedback" role="status"></div><div id="gpsUpdates"></div>
-<div class="note">El KML debe traer placa y fecha para alguna de las 21 unidades de Recolección. Se guarda en este navegador; otro KML de la misma placa y fecha actualiza ese día. El Excel y las paradas siguen cubriendo solo el 21/10 al 03/11 de 2026. No hay sincronización automática con SatGeo.</div>
+<div class="note">El KML debe traer placa y fecha para alguna de las 21 unidades de Recolección. Se guarda en este navegador; otro KML de la misma placa y fecha actualiza ese día. Los KML nuevos permiten estimar indicios GPS de 1 a menos de 10 minutos. El Excel y las paradas SatGeo de 10 minutos o más siguen cubriendo solo el 21/10 al 03/11 de 2026. No hay sincronización automática con SatGeo.</div>
 </div></details>
 <details class="toolAccordion" id="misCapas"><summary>Mis capas <span>· shapefile ZIP o GeoJSON</span></summary><div>
 <label for="routeFile">Agregar capa al mapa</label><input type="file" id="routeFile" accept=".zip,.geojson,.json" multiple><div id="routeFeedback" class="feedback" role="status"></div><div id="userLayers"></div>
@@ -241,8 +61,9 @@ aside{padding:12px 12px 24px}
 <div class="actions"><button id="exportGpsCsv" class="secondary">CSV de lecturas GPS del periodo</button></div>
 <div class="actions wrap"><button id="export" class="secondary">CSV de paradas visibles</button><button id="exportStays" class="secondary">CSV de estancias en plantel</button></div>
 <div class="actions wrap"><button id="excel" class="secondary">Excel del informe base</button><button id="exportShp" class="secondary">Shapefile del informe base</button></div>
-<p class="feedback" id="exportFeedback" role="status">Las descargas de paradas proceden del informe base. Cargar KML de otras fechas actualiza el recorrido GPS, pero no calcula paradas nuevas.</p>
+<p class="feedback" id="exportFeedback" role="status">El Excel y shapefile del informe base conservan solo las paradas SatGeo originales. CSV y shapefile con filtros actuales también incluyen indicios GPS de 1 a menos de 10 minutos cuando se muestran.</p>
 </div></details>
+<details class="toolAccordion"><summary>ArcGIS Online <span>· capa para publicar</span></summary><div><p>Descargá los eventos visibles como GeoJSON. En ArcGIS Online usá «Contenido → Nuevo elemento» para publicarlo como capa y crear un mapa web. El archivo HTML conserva su interfaz en el navegador; ArcGIS Online no lo aloja como página ejecutable.</p><button id="exportAgol" class="secondary" type="button">Descargar GeoJSON para ArcGIS Online</button><p id="agolFeedback" class="feedback" role="status"></p></div></details>
 <details class="toolAccordion" id="guardarTrabajo"><summary>Guardar y recuperar <span>· copia de este navegador</span></summary><div>
 <div class="actions"><button id="saveWorkspace">Guardar ahora</button><button id="backupWorkspace" class="secondary">Descargar respaldo JSON</button></div>
 <label for="restoreWorkspace">Restaurar JSON o cargar KML</label><input type="file" id="restoreWorkspace" accept=".json,.kml,.xml"><div id="saveStatus" class="note" role="status">Los cambios se guardan en este navegador. Descargá el JSON para llevarlos a otra computadora.</div>
@@ -252,29 +73,13 @@ aside{padding:12px 12px 24px}
 <div class="actions"><button id="toggleBaseData" class="secondary" type="button">Quitar capas iniciales de este visor</button></div><div id="baseDataStatus" class="feedback" role="status">Esto retira recorridos, paradas y planteles iniciales de la vista. Tus KML y capas agregadas se conservan.</div>
 </div></details>
 <details class="toolAccordion"><summary>Sobre los datos <span>· criterios y límites</span></summary><div>
-<div class="note">Paradas SatGeo desde 10 minutos: 10–&lt;20, 20–&lt;40, 40–&lt;60 y 60–&lt;240 minutos. Permanencias ≥4 h aparte; planteles confirmados separados. El recorrido se corta ante huecos de más de 15 minutos, horas repetidas o saltos incompatibles con 120 km/h. No se verifica el horario laboral.</div>
+<div class="note">Los intervalos 1–&lt;5 y 5–&lt;10 minutos son posibles detenciones calculadas a partir de lecturas GPS cercanas; no son eventos reportados por SatGeo ni confirman que el motor estuviera apagado. Elegí una placa para verlas. Las paradas SatGeo desde 10 minutos siguen en 10–&lt;20, 20–&lt;40, 40–&lt;60 y 1–&lt;4 horas. Permanencias ≥4 h aparte; planteles confirmados separados. El recorrido se corta ante huecos de más de 15 minutos, horas repetidas o saltos incompatibles con 120 km/h. No se verifica el horario laboral.</div>
 <div class="note warning">Solo Recolección (MSJ); Limpieza Urbana queda fuera. Pavas y San José son planteles confirmados. Una estancia agrupa filas del reporte: sus extremos son la primera y última parada registrada, no cruces GPS exactos. Otras permanencias de ≥4 h requieren revisión de su causa.</div>
 <div class="note">Fuente: reporte de paradas SatGeo y KML de «Histórico de texto» de 21 vehículos. El KML trae puntos fechados; las líneas unen lecturas consecutivas de forma aproximada y no están ajustadas a las calles.</div>
 </div></details>
 </div></details>
-</aside><div class="mapStage"><div id="map"></div>
-
-<div class="northBadge" aria-label="Norte">N<span>↑</span></div><div class="printTitle" id="printTitle"></div><div class="printLegend" id="printLegend"></div><div class="printFooter" id="printFooter"></div><section id="attributeDock" class="attributeDock" hidden aria-label="Tabla de atributos" aria-live="off">
-  <div class="attributeTop">
-    <div class="attributeHeading"><span class="attributeEyebrow" id="attributeLayerName">CAPA</span><strong id="attributeTitle">Atributos de la zona</strong><small id="attributeSummary"></small></div>
-    <div class="attributeTopActions"><button id="attributeMinimize" type="button" class="secondary" title="Contraer tabla">—</button><button id="attributeClose" type="button" class="secondary" title="Cerrar tabla" aria-label="Cerrar tabla de atributos">✕</button></div>
-  </div>
-  <div id="attributeBody" class="attributeBody">
-    <div class="attributeTabs" role="tablist" aria-label="Vista de los atributos"><button id="attrDetailTab" type="button" role="tab" aria-selected="true" class="attributeTab active">Zona seleccionada</button><button id="attrAllTab" type="button" role="tab" aria-selected="false" class="attributeTab">Tabla completa de la capa</button></div>
-    <div id="attrDetailView" class="attributeContent"><div class="attributeScroll"><table class="attributeDetailTable"><thead><tr><th>Campo</th><th>Valor</th></tr></thead><tbody id="attributeFields"></tbody></table></div><div class="attributeFooter"><span id="attributeGeometry"></span><button id="attrZoomSelected" type="button" class="secondary">Acercar a la zona</button></div></div>
-    <div id="attrAllView" class="attributeContent" hidden><div class="attributeSearchRow"><label for="attributeSearch">Buscar registros</label><input type="search" id="attributeSearch" placeholder="Filtrar por zona, distrito, jornada…"><span id="attributeCount"></span></div><div class="attributeScroll attributeAllScroll"><table class="attributeFullTable"><thead id="attributeColumnHeaders"></thead><tbody id="attributeRows"></tbody></table></div><div class="attributeFooter"><span id="attributePaging"></span><div class="attributePageActions"><button id="attributePrev" type="button" class="secondary">← Anterior</button><button id="attributeNext" type="button" class="secondary">Siguiente →</button></div></div></div>
-  </div>
-</section></div></div><div id="status" class="status" hidden>Se necesita internet para cargar el mapa base. Las posiciones GPS están incluidas en este archivo.</div>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/shpjs@6.2.0/dist/shp.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@2.6.3/dist/html2canvas-pro.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script>
+</aside><div class="mapStage"><div id="map"></div><div class="northBadge" aria-label="Norte">N<span>↑</span></div><div class="printTitle" id="printTitle"></div><div class="printLegend" id="printLegend"></div><div class="printFooter" id="printFooter"></div></div></div><div id="status" class="status" hidden>Se necesita internet para cargar el mapa base. Las posiciones GPS están incluidas en este archivo.</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://unpkg.com/shpjs@6.2.0/dist/shp.min.js"></script><script>
 // Escritor local de shapefiles de puntos y ZIP sin compresión.
 // No sube información a ningún servidor. Las coordenadas deben estar en WGS84.
 const shpEncoder = new TextEncoder();
@@ -527,7 +332,6 @@ function normalizeViewerWorkspace(raw, allowedPlates) {
   }
   const f = raw.filters || {};
   return {overlays, trackOverrides, baseIncluded: raw.baseIncluded !== false,plannedRoutesIncluded, filters: {
-    basemap: ['calles','claro','oscuro','satelite','topografico','osm','monocromo'].includes(f.basemap) ? f.basemap : 'calles',
     week: f.week === 'history' ? 'history' : f.week === '2' ? '2' : '1',
     plate: allowedPlates.includes(f.plate) ? f.plate : '',
     from: isValidGpsDay(f.from) ? f.from : '',
@@ -537,7 +341,7 @@ function normalizeViewerWorkspace(raw, allowedPlates) {
     showStops: f.showStops !== false,
     parking: f.parking !== false,
     plantel: f.plantel !== false,
-    bins: Array.isArray(f.bins) ? f.bins.map(Number).filter(x => Number.isInteger(x) && x >= 0 && x <= 3) : [0,1,2,3],
+    bins: Array.isArray(f.bins) ? (raw.stopBinsVersion===2 ? f.bins.map(Number).filter(x=>Number.isInteger(x)&&x>=0&&x<6) : [...new Set([0,1,...f.bins.map(Number).filter(x=>Number.isInteger(x)&&x>=0&&x<=3).map(x=>x+2)])]) : [0,1,2,3,4,5],
   }};
 }
 
@@ -550,7 +354,7 @@ const excelB64='UEsDBBQAAAAIAO1ea100H00+NQEAAIQDAAAPAAAAeGwvd29ya2Jvb2sueG1stdM9
 const periods={'1':['2026-10-21','2026-10-27'],'2':['2026-10-28','2026-11-03']};
 const reportStart='2026-10-21',reportEnd='2026-11-03';
 const colors=['#2055a5','#008b91','#8b4da8','#d86f35','#668d2b','#ac496b','#547384'];
-const bins=[['10–<20 min',10,20,'#22a5bb'],['20–<40 min',20,40,'#e7a738'],['40–<60 min',40,60,'#dc6d39'],['1–<4 horas',60,240,'#cd3f63']];
+const bins=[['1–<5 min · GPS',1,5,'#47a876'],['5–<10 min · GPS',5,10,'#94a642'],['10–<20 min · SatGeo',10,20,'#22a5bb'],['20–<40 min · SatGeo',20,40,'#e7a738'],['40–<60 min · SatGeo',40,60,'#dc6d39'],['1–<4 horas · SatGeo',60,240,'#cd3f63']];
 const routeColors=['#ec6d26','#078c8b','#6554c0','#767e11','#c33866'];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const week=document.getElementById('week'),plate=document.getElementById('plate'),ranges=document.getElementById('ranges');
@@ -559,95 +363,61 @@ Object.keys(tracks).sort().forEach(p=>{let o=document.createElement('option');o.
 plate.value='SM-6537';
 bins.forEach((b,i)=>{let l=document.createElement('label');l.className='check';l.innerHTML=`<input type="checkbox" class="bin" value="${i}" checked><span class="swatch" style="background:${b[3]}"></span>${b[0]}`;ranges.append(l)});
 const map=L.map('map',{preferCanvas:true}).setView([9.93,-84.08],12);
-// Mapas base de acceso sin llave en este HTML (el fondo requiere conexión).
-// Las variantes claras/oscuras de Canvas son servicios raster heredados de Esri.
-const baseEsri='https://server.arcgisonline.com/ArcGIS/rest/services/';
-const osmCredit='&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors';
-const esriCredit='Mapas &copy; Esri, HERE, Garmin, OpenStreetMap contributors y GIS User Community';
-const BASEMAP_DEFS={
-  calles:{label:'Calles',url:baseEsri+'World_Street_Map/MapServer/tile/{z}/{y}/{x}',attribution:esriCredit,credit:'Esri y proveedores',maxZoom:19},
-  claro:{label:'Claro',url:baseEsri+'Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',attribution:esriCredit,credit:'Esri y proveedores',maxZoom:19,maxNativeZoom:16},
-  oscuro:{label:'Oscuro',url:baseEsri+'Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',attribution:esriCredit,credit:'Esri y proveedores',maxZoom:19,maxNativeZoom:16},
-  satelite:{label:'Satélite',url:baseEsri+'World_Imagery/MapServer/tile/{z}/{y}/{x}',attribution:esriCredit,credit:'Esri y proveedores',maxZoom:19},
-  topografico:{label:'Topográfico',url:baseEsri+'World_Topo_Map/MapServer/tile/{z}/{y}/{x}',attribution:esriCredit,credit:'Esri y proveedores',maxZoom:19},
-  osm:{label:'OpenStreetMap',url:'https://tile.openstreetmap.org/{z}/{x}/{y}.png',attribution:osmCredit,credit:'OpenStreetMap',maxZoom:19},
-  monocromo:{label:'Blanco y negro',url:'https://tile.openstreetmap.org/{z}/{x}/{y}.png',attribution:osmCredit,credit:'OpenStreetMap',maxZoom:19,filter:'grayscale(100%) contrast(1.1)'}
-};
-let currentBasemapKey='calles',basemapLayer=null;
-function renderBasemapControls(){
-  for(const id of ['basemapFloatOptions']){
-    const group=document.getElementById(id);
-    group.replaceChildren();
-    for(const [key,def] of Object.entries(BASEMAP_DEFS)){
-      const button=document.createElement('button');button.type='button';
-      button.className='basemapOption';button.dataset.basemap=key;
-      button.setAttribute('aria-pressed',String(key===currentBasemapKey));
-      button.title='Cambiar a '+def.label;
-      const swatch=document.createElement('span');swatch.className='basemapThumb '+key;
-      swatch.setAttribute('aria-hidden','true');
-      const caption=document.createElement('span');caption.className='basemapName';caption.textContent=def.label;
-      button.append(swatch,caption);
-      button.onclick=()=>{
-        selectBasemap(key);
-        document.getElementById('basemapFloatMenu').hidden=true;
-        document.getElementById('basemapFloatToggle').setAttribute('aria-expanded','false');
-      };
-      group.append(button);
-    }
-  }
-  document.getElementById('basemapFloatLabel').textContent='Mapa base: '+BASEMAP_DEFS[currentBasemapKey].label;
-}
-function selectBasemap(key,{save=true}={}){
-  if(!Object.hasOwn(BASEMAP_DEFS,key))key='calles';
-  if(basemapLayer && key===currentBasemapKey){renderBasemapControls();return;}
-  const def=BASEMAP_DEFS[key];
-  // Solo se reemplaza el mapa de fondo, NO las capas GPS ni polígonos.
-  const next=L.tileLayer(def.url,{attribution:def.attribution,maxZoom:def.maxZoom,maxNativeZoom:def.maxNativeZoom||19,keepBuffer:2,crossOrigin:true});
-  next.addTo(map);next.bringToBack();
-  if(def.filter && next.getContainer()) next.getContainer().style.filter=def.filter;
-  const previous=basemapLayer;basemapLayer=next;currentBasemapKey=key;
-  if(previous)map.removeLayer(previous);
-  const status=document.getElementById('status');
-  status.hidden=true;
-  next.on('tileerror',()=>{if(basemapLayer===next)status.hidden=false;});
-  next.on('tileload',()=>{if(basemapLayer===next)status.hidden=true;});
-  renderBasemapControls();
-  if(save)scheduleWorkspaceSave();
-}
+const base=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Mapa base © Esri, HERE, Garmin, FAO, USGS',maxZoom:19}).addTo(map);
 L.control.scale({position:'bottomleft',metric:true,imperial:false,maxWidth:180}).addTo(map);
-selectBasemap('calles',{save:false});
-const basemapFloatToggle=document.getElementById('basemapFloatToggle');
-const basemapFloatMenu=document.getElementById('basemapFloatMenu');
-basemapFloatToggle.addEventListener('click',()=>{
-  basemapFloatMenu.hidden=!basemapFloatMenu.hidden;
-  basemapFloatToggle.setAttribute('aria-expanded',String(!basemapFloatMenu.hidden));
-});
-document.addEventListener('click',event=>{
-  if(!event.target.closest('#basemapFloat')){
-    basemapFloatMenu.hidden=true;
-    basemapFloatToggle.setAttribute('aria-expanded','false');
-  }
-});
-document.addEventListener('keydown',event=>{
-  if(event.key==='Escape'&&!basemapFloatMenu.hidden){
-    basemapFloatMenu.hidden=true;
-    basemapFloatToggle.setAttribute('aria-expanded','false');
-    basemapFloatToggle.focus();
-  }
-});
+base.on('tileerror',()=>document.getElementById('status').hidden=false);
 document.getElementById('toolsLink').addEventListener('click',()=>{document.getElementById('tools').open=true});
 const stopLayer=L.layerGroup().addTo(map),routeLayer=L.layerGroup().addTo(map),plantelLayer=L.layerGroup().addTo(map);let visible=[],visibleStays=[],bounds=null,userLayers=[],layerSeq=0,trackOverrides=Object.create(null),baseIncluded=true,saveTimer=null,saveQueue=Promise.resolve();
 function historyBounds(){let days=[...(baseIncluded?Object.values(tracks):[]),...Object.values(trackOverrides)].flatMap(byDay=>Object.keys(byDay));days.sort();return [days[0]||null,days.at(-1)||null]}
 function historyDefaults(){let [first,last]=historyBounds();if(!last)return [reportStart,reportEnd];let a=new Date(Date.parse(last+'T00:00:00Z')-6*86400000).toISOString().slice(0,10);return [a<first?first:a,last]}
 function selectedDates(){let [a,b]=week.value==='history'?historyDefaults():periods[week.value],f=document.getElementById('from').value,t=document.getElementById('to').value;return [f||a,t||b]}
 function clampDates(){for(const id of ['from','to']){let x=document.getElementById(id);if(week.value==='history'){x.removeAttribute('min');x.removeAttribute('max');continue}let [a,b]=periods[week.value];x.min=a;x.max=b;if(x.value&&(x.value<a||x.value>b))x.value=''}}
-function syncOriginalControls(){let master=document.getElementById('showOriginals').checked,short=document.getElementById('showStops').checked;document.getElementById('route').disabled=!master;for(const id of ['showStops','parking','plantel'])document.getElementById(id).disabled=!master||!baseIncluded;document.querySelectorAll('.bin').forEach(x=>x.disabled=!master||!baseIncluded||!short)}
+function syncOriginalControls(){let master=document.getElementById('showOriginals').checked,short=document.getElementById('showStops').checked,hasKml=Object.keys(trackOverrides).length>0;document.getElementById('route').disabled=!master;document.getElementById('showStops').disabled=!master||(!baseIncluded&&!hasKml);for(const id of ['parking','plantel'])document.getElementById(id).disabled=!master||!baseIncluded;document.querySelectorAll('.bin').forEach(x=>x.disabled=!master||!short||(Number(x.value)>=2&&!baseIncluded))}
 function category(x){return x.minutos>=240?'parking':bins.findIndex(b=>x.minutos>=b[1]&&x.minutos<b[2])}
 function distanceKm(a,b){let lat=a[1]/1e6,lon=a[2]/1e6,lat2=b[1]/1e6,lon2=b[2]/1e6;return Math.hypot((lat2-lat)*111.1,(lon2-lon)*111.1*Math.cos(lat*Math.PI/180))}
 function timeLabel(s){return new Date(s*1000).toISOString().slice(11,19)}
+const gpsStopCache=new WeakMap();
+// Indicio: al menos tres lecturas distintas, separación máxima de 90 s,
+// todas a 15 m o menos de la primera lectura durante 1 a menos de 10 min.
+// Se omite cualquier tramo que se solape con una parada SatGeo de esa placa.
+function gpsShortFromDay(source,day,vehicle){
+ if(!Array.isArray(source)||!source.length)return [];
+ const cached=gpsStopCache.get(source);
+ if(cached&&cached.day===day&&cached.vehicle===vehicle)return cached.events;
+ const reports=stops.filter(x=>x.placa===vehicle),events=[];let run=[];
+ function flush(){
+  if(run.length<3)return;
+  const mins=(run.at(-1)[0]-run[0][0])/60;
+  if(mins<1||mins>=10)return;
+  const start=day+' '+timeLabel(run[0][0]),end=day+' '+timeLabel(run.at(-1)[0]);
+  if(reports.some(x=>start<x.fin&&end>x.inicio)||
+     stays.some(x=>x.placa===vehicle&&start<x.fin&&end>x.inicio))return;
+  const lat=run.reduce((n,q)=>n+q[1],0)/run.length/1e6;
+  const lon=run.reduce((n,q)=>n+q[2],0)/run.length/1e6;
+  events.push({id:'GPS-'+vehicle+'-'+day+'-'+run[0][0],placa:vehicle,
+    inicio:start,fin:end,minutos:mins,lat,lon,fuente:'GPS estimado',
+    tipo:'Baja movilidad GPS',lugar:'Lecturas dentro de 15 m · revisar en campo',grupo:'gps_inferido'});
+ }
+ for(const q of source){
+  if(!run.length){run=[q];continue}
+  const previous=run.at(-1),gap=q[0]-previous[0];
+  if(gap<=0)continue;
+  if(gap>90||distanceKm(run[0],q)*1000>15){flush();run=[q]}
+  else run.push(q);
+ }
+ flush();gpsStopCache.set(source,{day,vehicle,events});return events;
+}
 function draw(){stopLayer.clearLayers();routeLayer.clearLayers();plantelLayer.clearLayers();syncOriginalControls();const [from,to]=selectedDates(),p=plate.value,chosen=[...document.querySelectorAll('.bin:checked')].map(x=>+x.value),showOriginals=document.getElementById('showOriginals').checked,showStops=document.getElementById('showStops').checked,showParking=document.getElementById('parking').checked,showPlantel=document.getElementById('plantel').checked,[wa,wb]=week.value==='history'?[from,to]:periods[week.value],reportInRange=baseIncluded&&from<=reportEnd&&to>=reportStart;
- const [gpsFirst,gpsLast]=historyBounds(),coverage=document.getElementById('coverageInfo');coverage.textContent=from>to?'La fecha inicial es posterior a la final. Corregí el rango.':!baseIncluded?`Las capas iniciales se quitaron de esta vista. ${gpsFirst?`KML cargados: ${gpsFirst} al ${gpsLast}.`:'Cargá un KML de SatGeo para ver recorridos.'} Las paradas del informe base no aparecen.`:week.value==='history'?`Histórico GPS disponible en este archivo: ${gpsFirst} al ${gpsLast} (según placa). ${reportInRange?'Las paradas solo cubren el tramo 21/10–03/11 de 2026 dentro de este rango.':'No hay reporte de paradas para este rango; las cifras de paradas se dejan vacías.'}`:'Informe original de paradas: 21/10–03/11 de 2026. Usá «Histórico GPS» para consultar otras fechas.';
- visible=showOriginals&&baseIncluded?stops.filter(x=>{let d=x.inicio.slice(0,10),c=category(x);return d>=wa&&d<=wb&&d>=from&&d<=to&&(!p||x.placa===p)&&(c==='parking'?showParking:showStops&&chosen.includes(c))}):[];
+ const [gpsFirst,gpsLast]=historyBounds(),coverage=document.getElementById('coverageInfo');coverage.textContent=from>to?'La fecha inicial es posterior a la final. Corregí el rango.':!baseIncluded?`Las capas iniciales se quitaron de esta vista. ${gpsFirst?`KML cargados: ${gpsFirst} al ${gpsLast}.`:'Cargá un KML de SatGeo para ver recorridos.'} Si elegís una placa se pueden estimar indicios GPS menores de 10 min; las paradas del informe base no aparecen.`:week.value==='history'?`Histórico GPS disponible en este archivo: ${gpsFirst} al ${gpsLast} (según placa). ${reportInRange?'Las paradas SatGeo solo cubren el tramo 21/10–03/11 de 2026.':'No hay reporte SatGeo desde 10 minutos para este rango; podés ver indicios GPS menores de 10 min.'}`:'Informe de paradas SatGeo: 21/10–03/11 de 2026. Los indicios GPS menores de 10 min son aproximados.';
+ const reported=showOriginals&&baseIncluded?stops.filter(x=>{let d=x.inicio.slice(0,10),c=category(x);return d>=wa&&d<=wb&&d>=from&&d<=to&&(!p||x.placa===p)&&(c==='parking'?showParking:showStops&&chosen.includes(c))}):[];
+  let inferred=[];
+  if(showOriginals&&showStops&&p&&from<=to&&(chosen.includes(0)||chosen.includes(1))){
+    const byDay={...(baseIncluded?tracks[p]:{}),...(trackOverrides[p]||{})};
+    for(const day of Object.keys(byDay).sort())if(day>=wa&&day<=wb&&day>=from&&day<=to)
+      inferred.push(...gpsShortFromDay(byDay[day],day,p).filter(x=>chosen.includes(category(x))));
+  }
+  visible=reported.concat(inferred);
+  document.getElementById('gpsEstimateInfo').textContent=!showOriginals?'Datos originales ocultos.':!p?'Elegí una placa para calcular y ver indicios GPS menores de 10 minutos.':`${inferred.length.toLocaleString('es-CR')} indicio(s) de 1 a menos de 10 min para ${p}. Son estimaciones por baja movilidad GPS (radio 15 m, tres o más lecturas, separación ≤90 s); no confirman parada ni motor apagado.`;
  visibleStays=showOriginals&&baseIncluded&&showPlantel?stays.filter(x=>{let d=x.inicio.slice(0,10);return x.horas>=4&&d>=wa&&d<=wb&&d>=from&&d<=to&&(!p||x.placa===p)}):[];
  let points=0,segments=0,extent=[],days=[];
  if(showOriginals&&p&&document.getElementById('route').checked){let route={...(baseIncluded?tracks[p]:{}),...(trackOverrides[p]||{})};
@@ -658,10 +428,12 @@ function draw(){stopLayer.clearLayers();routeLayer.clearLayers();plantelLayer.cl
  const dayBox=document.getElementById('days');dayBox.replaceChildren();for(const d of days){let s=document.createElement('span');s.className='day';s.style.background=d.color;s.textContent=d.day.slice(8,10)+'/'+d.day.slice(5,7);dayBox.append(s)}
  document.getElementById('readingCount').textContent=points.toLocaleString('es-CR');
  document.getElementById('routeInfo').textContent=!showOriginals?'Datos GPS y paradas ocultos. Tus capas agregadas permanecen visibles.':!p?'Elegí una placa para ver su recorrido GPS.':!document.getElementById('route').checked?'Recorrido oculto.':points?`${points.toLocaleString('es-CR')} lecturas GPS · ${segments} tramos trazados. Las etiquetas de colores muestran las fechas de cada día.`:'No hay lecturas GPS de esta placa en las fechas seleccionadas.';
- const list=document.getElementById('items');list.replaceChildren();document.getElementById('shortShown').textContent=reportInRange?visible.filter(x=>x.minutos<240).length:'—';document.getElementById('parkingShown').textContent=reportInRange?visible.filter(x=>x.minutos>=240).length:'—';
- visible.forEach((x,i)=>{let parking=category(x)==='parking',col=parking?'#8035a0':bins[category(x)][3],m=L.circleMarker([x.lat,x.lon],{radius:parking?10:7,color:'#fff',weight:1.5,fillColor:col,fillOpacity:.95}).addTo(stopLayer);
- m.bindPopup(`<b>${esc(x.placa)} · ${x.minutos.toFixed(1)} minutos</b><br>${parking?'<b>Posible parqueo (≥4 h) · verificar</b><br>':'Parada de 10 min a &lt;4 h<br>'}Inicio: ${esc(x.inicio)}<br>Fin: ${esc(x.fin)}<br>Reporte: ${esc(x.tipo)}<br>Lugar: ${esc(x.lugar)}<br>ID: ${esc(x.id)}<br><small>Horario de trabajo por verificar; el reporte puede recortar eventos en medianoche.</small>`);extent.push([x.lat,x.lon]);
- if(i<100){let row=document.createElement('div');row.className='item';row.innerHTML=`<b style="color:${col}">${esc(x.placa)} · ${parking?'Posible parqueo · ':''}${x.minutos.toFixed(1)} min</b><small>${esc(x.inicio)} · ${esc(x.lugar)}</small>`;row.onclick=()=>{map.setView([x.lat,x.lon],16);m.openPopup()};list.append(row)}});
+ const list=document.getElementById('items');list.replaceChildren();document.getElementById('shortShown').textContent=reportInRange||inferred.length?visible.filter(x=>x.minutos<240).length:'—';document.getElementById('parkingShown').textContent=reportInRange?visible.filter(x=>x.minutos>=240).length:'—';
+ visible.forEach((x,i)=>{let parking=category(x)==='parking',estimated=x.fuente==='GPS estimado',col=parking?'#8035a0':bins[category(x)][3],m=L.circleMarker([x.lat,x.lon],{radius:parking?10:estimated?6:7,color:estimated?'#123c50':'#fff',weight:estimated?1:1.5,fillColor:col,fillOpacity:estimated?.82:.95}).addTo(stopLayer);
+  m.bindPopup(`<b>${esc(x.placa)} · ${x.minutos.toFixed(1)} minutos</b><br>${parking?'<b>Posible parqueo (≥4 h) · verificar</b><br>':estimated?'<b>Indicio GPS de baja movilidad · verificar</b><br>No es una parada confirmada por SatGeo.<br>':'Parada reportada por SatGeo (10 min–<4 h)<br>'}Inicio: ${esc(x.inicio)}<br>Fin: ${esc(x.fin)}<br>Fuente: ${estimated?'KML GPS · cálculo aproximado':'Reporte SatGeo'}<br>Lugar: ${esc(x.lugar)}<br>ID: ${esc(x.id)}<br><small>El GPS no indica si el motor estaba apagado; el reporte puede recortar eventos en medianoche.</small>`);extent.push([x.lat,x.lon]);
+  if(i<100){let row=document.createElement('div');row.className='item';row.innerHTML=`<b style="color:${col}">${esc(x.placa)} · ${parking?'Posible parqueo · ':estimated?'GPS estimado · ':''}${x.minutos.toFixed(1)} min</b><small>${esc(x.inicio)} · ${esc(x.lugar)}</small>`;row.onclick=()=>{map.setView([x.lat,x.lon],16);m.openPopup()};list.append(row)}});
+
+
  if(visible.length>100){let more=document.createElement('small');more.textContent=`Se listan las primeras 100 de ${visible.length}; todas aparecen en el mapa.`;list.append(more)}
  const stayList=document.getElementById('stays');stayList.replaceChildren();document.getElementById('plantelShown').textContent=reportInRange?visibleStays.length:'—';
  if(showOriginals&&showPlantel&&reportInRange){let markers={};for(const site of sites){let count=visibleStays.filter(x=>x.sitio===site.nombre),label=site.nombre.includes('Pavas')?'Pavas':'San José';let m=L.circleMarker([site.lat,site.lon],{radius:15,color:'#fff',weight:3,fillColor:'#12679a',fillOpacity:.98}).addTo(plantelLayer);m.bindTooltip('🅿 '+label,{permanent:true,direction:'right',offset:[12,0],className:'plantelLabel'});m.bindPopup(`<b>${esc(site.nombre)}</b><br>Plantel confirmado por la Municipalidad.<br>${count.length} estancias ≥4 h con los filtros actuales.<br>Las horas de llegada y salida son aproximadas según las paradas registradas.`);markers[site.nombre]=m;extent.push([site.lat,site.lon])}
@@ -680,7 +452,7 @@ function prepareMapSheet(){
  const heading=document.createElement('b');heading.textContent='Leyenda';legend.append(heading);
  const entries=[],shown=document.getElementById('showOriginals').checked;
  if(shown&&document.getElementById('route').checked)entries.push(['linear-gradient(90deg,#2055a5,#008b91,#8b4da8,#d86f35)','Recorrido GPS · color por día']);
- if(shown&&baseIncluded&&document.getElementById('showStops').checked)for(const input of document.querySelectorAll('.bin:checked')){const bin=bins[Number(input.value)];entries.push([bin[3],`Parada ${bin[0]}`])}
+ if(shown&&document.getElementById('showStops').checked)for(const input of document.querySelectorAll('.bin:checked')){const i=Number(input.value);if(i<2&&!plate.value||i>=2&&!baseIncluded)continue;const bin=bins[i];entries.push([bin[3],`${i<2?'Indicio GPS':'Parada SatGeo'} ${bin[0]}`])}
  if(shown&&baseIncluded&&document.getElementById('parking').checked)entries.push(['#8035a0','Otra permanencia ≥4 h']);
  if(shown&&baseIncluded&&document.getElementById('plantel').checked)entries.push(['#12679a','Plantel confirmado']);
  const visibleOverlays=userLayers.filter(x=>x.visible);
@@ -694,169 +466,65 @@ function prepareMapSheet(){
  for(const [color,label] of entries){const line=document.createElement('div');line.className='legendRow';const mark=document.createElement('span');mark.className='swatch';mark.style.background=color;const text=document.createElement('span');text.textContent=label;line.append(mark,text);legend.append(line)}
  if(extra>0){const more=document.createElement('small');more.textContent=`Y ${extra} capa(s) agregada(s) más`;legend.append(more)}
  if(!entries.length){const empty=document.createElement('small');empty.textContent='No hay capas visibles con estos filtros';legend.append(empty)}
- document.getElementById('printFooter').textContent='Fuente: SatGeo · KML de Histórico de texto y reporte de paradas del 21/10 al 03/11 de 2026; capa de rutas programadas 2026 aportada por la Municipalidad. Recorridos GPS aproximados. Fondo: '+BASEMAP_DEFS[currentBasemapKey].label+' (© '+BASEMAP_DEFS[currentBasemapKey].credit+').';
+ document.getElementById('printFooter').textContent='Fuente: SatGeo · KML de Histórico de texto y reporte de paradas del 21/10 al 03/11 de 2026; estimaciones GPS de 1 a menos de 10 min sujetas a verificación; capa de rutas programadas 2026 aportada por la Municipalidad. Recorridos GPS aproximados. Mapa base © Esri y sus proveedores.';
 }
-// Exportación cartográfica real: PDF directo. No usa la ventana de impresión.
-const printButton=document.getElementById('printMap');
-const printFeedback=document.getElementById('printFeedback');
-let generatingPdf=false;
-function pdfHex(rgb){
-  const value=String(rgb||'').trim();
-  if(/^#[0-9a-f]{6}$/i.test(value))return value;
-  const match=value.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
-  return match?'#'+match.slice(1,4).map(n=>Number(n).toString(16).padStart(2,'0')).join(''):'#087e86';
-}
-function pdfLegendEntries(){
-  prepareMapSheet();
-  return [...document.querySelectorAll('#printLegend .legendRow')].map(line=>({
-    color:pdfHex(line.querySelector('.swatch')?.style.backgroundColor),
-    label:line.querySelector('span:last-child')?.textContent||''
-  }));
-}
-function pdfWrap(pdf,text,width){return pdf.splitTextToSize(String(text||''),width)}
-function addPdfCompass(pdf,x,y){
-  pdf.setFillColor(255,255,255);pdf.setDrawColor(195,210,204);
-  pdf.roundedRect(x-6,y-7,12,21,2,2,'FD');
-  pdf.setFont('helvetica','bold');pdf.setFontSize(9);pdf.setTextColor(15,62,67);
-  pdf.text('N',x,y);
-  pdf.setLineWidth(.55);pdf.line(x,y+3,x,y+11);
-  pdf.line(x,y+3,x-1.8,y+6);pdf.line(x,y+3,x+1.8,y+6);
-}
-function addPdfLegend(pdf,entries,x,y,width,maxHeight){
-  // Leyenda sobre el fondo, con control de altura para no tapar el mapa completo.
-  const rows=entries.slice(0,10);
-  let cursor=y+6;const prepared=[];
-  for(const row of rows){
-    let lines=pdfWrap(pdf,row.label,width-12);
-    if(lines.length>2)lines=lines.slice(0,2);
-    prepared.push({color:row.color,lines});
-    cursor+=Math.max(4.5,lines.length*3.2+1);
-  }
-  const extra=Math.max(0,entries.length-rows.length);
-  const required=cursor-y+4+(extra?4:0);
-  const boxHeight=Math.min(maxHeight,required);
-  pdf.setFillColor(255,255,255);pdf.setDrawColor(202,217,211);
-  pdf.roundedRect(x,y,width,boxHeight,2.2,2.2,'FD');
-  pdf.setTextColor(26,58,62);pdf.setFont('helvetica','bold');pdf.setFontSize(7.3);
-  pdf.text('Leyenda',x+4,y+5.4);
-  let yy=y+10.6;pdf.setFont('helvetica','normal');pdf.setFontSize(6.1);
-  for(const row of prepared){
-    if(yy>y+boxHeight-5)break;
-    pdf.setFillColor(row.color);pdf.setDrawColor(row.color);
-    pdf.circle(x+5,yy-1.2,1.25,'FD');
-    pdf.setTextColor(35,68,73);
-    for(const line of row.lines){pdf.text(line,x+9,yy);yy+=3.25}
-    yy+=1.1;
-  }
-  if(extra && yy<y+boxHeight-2.5){
-    pdf.setFontSize(6);pdf.text('+'+extra+' clases adicionales',x+4,yy);
-  }
-}
-function waitForMapTiles(timeout=4500){
-  return new Promise(resolve=>{
-    if(!basemapLayer || !basemapLayer.isLoading())return resolve();
-    let finished=false;
-    const end=()=>{if(finished)return;finished=true;clearTimeout(timer);basemapLayer.off('load',end);resolve()};
-    const timer=setTimeout(end,timeout);
-    basemapLayer.once('load',end);
-  });
-}
+let printView=null;const printButton=document.getElementById('printMap');
+function finishMapPrint(){if(!printView)return;const saved=printView;printView=null;document.body.classList.remove('mapPrint');map.invalidateSize({pan:false});map.setView(saved.center,saved.zoom,{animate:false});printButton.disabled=false}
+window.addEventListener('afterprint',finishMapPrint);
 printButton.onclick=async()=>{
-  if(generatingPdf)return;
-  generatingPdf=true;printButton.disabled=true;
-  const originalLabel=printButton.innerHTML;
-  printButton.textContent='Generando PDF…';
-  printFeedback.className='feedback pdfFeedback';
-  printFeedback.textContent='Preparando el mapa…';
-  try{
-    if(typeof html2canvas!=='function'||!window.jspdf?.jsPDF){
-      throw new Error('No se cargaron las herramientas PDF. Comprobá tu conexión a internet y actualizá la página.');
-    }
-    // La exportación usa exactamente el mapa actual; no cambia filtros ni extensión.
-    const legends=pdfLegendEntries();
-    const stage=document.getElementById('map');
-    await waitForMapTiles();
-    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-    printFeedback.textContent='Generando el archivo…';
-    const canvas=await html2canvas(stage,{
-      backgroundColor:'#ffffff',useCORS:true,allowTaint:false,logging:false,
-      imageTimeout:15000,scale:Math.max(1,Math.min(2,1750/Math.max(1,stage.clientWidth))),
-      onclone:cloned=>{
-        // La tabla de atributos y el menú flotante no forman parte del mapa exportado.
-        cloned.querySelector('#basemapFloatMenu')?.setAttribute('hidden','');
-        cloned.querySelector('#attributeDock')?.setAttribute('hidden','');
-      }
-    });
-    if(!canvas.width||!canvas.height)throw new Error('El mapa no está listo para capturarse.');
-    const {jsPDF}=window.jspdf;
-    const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:'a4',compress:true});
-    const pageWidth=297,pageHeight=210;
-    pdf.setFillColor(255,255,255);pdf.rect(0,0,pageWidth,pageHeight,'F');
-    // Diseño compacto: título sobrio, mapa dominante y créditos en un pie fino.
-    pdf.setFillColor(16,63,67);pdf.rect(0,0,pageWidth,18,'F');
-    const [from,to]=selectedDates();
-    const vehicle=plate.value||'Todas las placas';
-    pdf.setFont('helvetica','bold');pdf.setTextColor(255,255,255);pdf.setFontSize(12);
-    pdf.text('Recolección · '+vehicle,9,8.5);
-    pdf.setFont('helvetica','normal');pdf.setFontSize(7.3);
-    pdf.text('San José  |  '+from+' — '+to,9,13.8);
-    pdf.setFontSize(7.2);pdf.text('Mapa base: '+BASEMAP_DEFS[currentBasemapKey].label,288,12,{align:'right'});
-    const bx=7,by=21,bw=283,bh=172;
-    pdf.setFillColor(246,249,247);pdf.setDrawColor(184,205,197);
-    pdf.rect(bx,by,bw,bh,'FD');
-    const imgAspect=canvas.width/canvas.height;
-    const pageAspect=bw/bh;
-    let iw,ih,ix,iy;
-    if(imgAspect>pageAspect){iw=bw;ih=bw/imgAspect;ix=bx;iy=by+(bh-ih)/2}
-    else{ih=bh;iw=bh*imgAspect;ix=bx+(bw-iw)/2;iy=by}
-    const data=canvas.toDataURL('image/jpeg',.92);
-    pdf.addImage(data,'JPEG',ix,iy,iw,ih,undefined,'FAST');
-    pdf.setDrawColor(172,191,184);pdf.rect(bx,by,bw,bh);
-    addPdfCompass(pdf,bx+bw-10,by+10);
-    if(legends.length)addPdfLegend(pdf,legends,bx+bw-54,by+bh-5-Math.min(66,12+legends.slice(0,10).reduce((n,r)=>n+Math.min(2,Math.ceil(r.label.length/39))*3.2+1.5,0)),50,66);
-    pdf.setTextColor(63,90,89);pdf.setFont('helvetica','normal');pdf.setFontSize(6.4);
-    const credit='Fuente: SatGeo y Municipalidad de San José. Recorridos GPS aproximados; cartografía: '+BASEMAP_DEFS[currentBasemapKey].credit+'.';
-    pdf.text(pdfWrap(pdf,credit,279).slice(0,2),9,198);
-    pdf.setFontSize(6);
-    pdf.text('Informe base: 21/10–03/11/2026',288,205,{align:'right'});
-    const name=`Mapa_Recoleccion_${vehicle.replace(/[^A-Za-z0-9_-]/g,'_')}_${from}_${to}.pdf`;
-    printFeedback.classList.add('is-ok');
-    printFeedback.textContent='Descarga iniciada.';
-    pdf.save(name);
-    setTimeout(()=>{if(printFeedback.textContent==='Descarga iniciada.'){printFeedback.textContent='';printFeedback.classList.remove('is-ok')}},4000);
-  }catch(err){
-    console.error('Error al generar el PDF:',err);
-    printFeedback.classList.add('is-error');
-    printFeedback.textContent='No se pudo generar el PDF: '+(err?.message||String(err));
-  }finally{
-    generatingPdf=false;printButton.disabled=false;printButton.innerHTML=originalLabel;
-  }
+ if(printView)return;prepareMapSheet();printView={center:map.getCenter(),zoom:map.getZoom()};printButton.disabled=true;
+ const tileWait=new Promise(resolve=>{let timer=setTimeout(resolve,1500);base.once('load',()=>{clearTimeout(timer);resolve()})});
+ document.body.classList.add('mapPrint');await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+ map.invalidateSize({pan:false});await tileWait;
+ try{window.print()}catch(err){finishMapPrint();alert('No se pudo abrir la impresión: '+(err.message||String(err)))}
 };
-for(const id of ['week','plate','from','to','showOriginals','route','showStops','parking','plantel'])document.getElementById(id).addEventListener('change',()=>{if(id==='week'){if(week.value==='history'){let [a,b]=historyDefaults();document.getElementById('from').value=a;document.getElementById('to').value=b}document.getElementById('dateFilters').open=week.value==='history';clampDates()}draw();if(id==='week'||id==='plate')fit();scheduleWorkspaceSave()});ranges.addEventListener('change',()=>{draw();scheduleWorkspaceSave()});
+for(const id of ['week','plate','from','to','showOriginals','route','showStops','parking','plantel'])document.getElementById(id).addEventListener('change',()=>{if(id==='week'){if(week.value==='history'){let [a,b]=historyDefaults();document.getElementById('from').value=a;document.getElementById('to').value=b}clampDates()}draw();if(id==='week'||id==='plate')fit();scheduleWorkspaceSave()});ranges.addEventListener('change',()=>{draw();scheduleWorkspaceSave()});
 document.getElementById('fit').onclick=fit;
-document.getElementById('reset').onclick=()=>{week.value='1';plate.value='SM-6537';document.getElementById('from').value='';document.getElementById('to').value='';document.getElementById('dateFilters').open=false;document.getElementById('showOriginals').checked=true;document.getElementById('route').checked=true;document.getElementById('showStops').checked=true;document.getElementById('parking').checked=true;document.getElementById('plantel').checked=true;document.querySelectorAll('.bin').forEach(x=>x.checked=true);clampDates();draw();fit();scheduleWorkspaceSave()};
+document.getElementById('reset').onclick=()=>{week.value='1';plate.value='SM-6537';document.getElementById('from').value='';document.getElementById('to').value='';document.getElementById('showOriginals').checked=true;document.getElementById('route').checked=true;document.getElementById('showStops').checked=true;document.getElementById('parking').checked=true;document.getElementById('plantel').checked=true;document.querySelectorAll('.bin').forEach(x=>x.checked=true);clampDates();draw();fit();scheduleWorkspaceSave()};
 function download(blob,name){let url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=name;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000)}
-document.getElementById('export').onclick=()=>{let cols=['ID','Placa','Inicio','Fin','Minutos','Clasificación','Tipo SatGeo','Lugar SatGeo','Latitud','Longitud','Horario'];let rows=visible.map(x=>[x.id,x.placa,x.inicio,x.fin,x.minutos,x.minutos>=240?'Posible parqueo':'Parada',x.tipo,x.lugar,x.lat,x.lon,'Por verificar']);let csv='\ufeff'+[cols,...rows].map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');download(new Blob([csv],{type:'text/csv;charset=utf-8'}),`eventos_recoleccion_${week.value}.csv`)};
+document.getElementById('export').onclick=()=>{let cols=['ID','Placa','Inicio','Fin','Minutos','Intervalo','Clasificación','Fuente','Tipo de evento','Lugar o referencia','Latitud','Longitud','Horario'];let rows=visible.map(x=>[x.id,x.placa,x.inicio,x.fin,x.minutos,category(x)==='parking'?'≥4 h':bins[category(x)][0],x.fuente==='GPS estimado'?'Indicio por GPS':x.minutos>=240?'Posible parqueo':'Parada SatGeo',x.fuente||'Reporte SatGeo',x.tipo,x.lugar,x.lat,x.lon,'Por verificar']);let csv='\ufeff'+[cols,...rows].map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');download(new Blob([csv],{type:'text/csv;charset=utf-8'}),`eventos_recoleccion_${week.value}.csv`)};
 document.getElementById('exportStays').onclick=()=>{let cols=['Estancia','Placa','Plantel','Primera parada','Fin última parada','Horas entre extremos','Horas reportadas','Hueco sin evento (min)','ID SatGeo'];let rows=visibleStays.map(x=>[x.id,x.placa,x.sitio,x.inicio,x.fin,x.horas,x.horas_reportadas,x.hueco_min,x.ids_satgeo]);let csv='\ufeff'+[cols,...rows].map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');download(new Blob([csv],{type:'text/csv;charset=utf-8'}),`estancias_planteles_semana_${week.value}.csv`)};
 document.getElementById('exportGpsCsv').onclick=()=>{const p=plate.value,[from,to]=selectedDates(),feedback=document.getElementById('exportFeedback');if(!p){feedback.textContent='Elegí una placa para exportar sus lecturas GPS.';return}const byDay={...(baseIncluded?tracks[p]:{}),...(trackOverrides[p]||{})},rows=[];for(const day of Object.keys(byDay).sort()){if(day<from||day>to)continue;for(const q of byDay[day])rows.push(`${p},${day} ${timeLabel(q[0])},${(q[1]/1e6).toFixed(6)},${(q[2]/1e6).toFixed(6)}`)}if(!rows.length){feedback.textContent='No hay lecturas GPS de esta placa en las fechas elegidas.';return}download(new Blob(['\ufeffPlaca,Fecha y hora SatGeo,Latitud,Longitud\r\n',rows.join('\r\n'),'\r\n'],{type:'text/csv;charset=utf-8'}),`GPS_${p}_${from}_${to}.csv`);feedback.textContent=`Se exportaron ${rows.length.toLocaleString('es-CR')} lecturas GPS de ${p} entre ${from} y ${to}.`};
 function embeddedDownload(b64,name,type){let raw=atob(b64),data=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)data[i]=raw.charCodeAt(i);download(new Blob([data],{type}),name)}
 document.getElementById('excel').onclick=()=>embeddedDownload(excelB64,'Informe_paradas_y_posibles_parqueos_21oct_03nov2026.xlsx','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 document.getElementById('exportShp').onclick=()=>embeddedDownload(shpB64,'Paradas_y_posibles_parqueos_recoleccion_21oct_03nov2026_SHP.zip','application/zip');
+document.getElementById('exportAgol').onclick=()=>{
+ const feedback=document.getElementById('agolFeedback');
+ const features=visible.map(x=>({type:'Feature',geometry:{type:'Point',coordinates:[x.lon,x.lat]},properties:{
+  ID:String(x.id),PLACA:String(x.placa),INICIO:x.inicio,FIN:x.fin,
+  MINUTOS:Number(x.minutos.toFixed(2)),RANGO:category(x)==='parking'?'>=4 h':bins[category(x)][0],
+  CLASE:x.fuente==='GPS estimado'?'INDICIO_GPS':x.minutos>=240?'POSIBLE_PARQUEO':'PARADA_SATGEO',
+  FUENTE:x.fuente||'Reporte SatGeo',LUGAR:x.lugar||'',SITIO:''}}));
+ for(const x of visibleStays)features.push({type:'Feature',geometry:{type:'Point',coordinates:[x.lon,x.lat]},properties:{
+  ID:String(x.id),PLACA:String(x.placa),INICIO:x.inicio,FIN:x.fin,
+  MINUTOS:Number((x.horas*60).toFixed(2)),RANGO:'>=4 h plantel',CLASE:'ESTANCIA_PLANTEL',
+  FUENTE:'Reporte SatGeo agrupado',LUGAR:'',SITIO:x.sitio}});
+ if(!features.length){feedback.textContent='No hay eventos visibles para exportar. Revisá los filtros y la placa.';return}
+ const geo={type:'FeatureCollection',features};
+ download(new Blob([JSON.stringify(geo)],{type:'application/geo+json'}),`recoleccion_arcgis_online_${week.value}_${plate.value||'todas'}.geojson`);
+ feedback.textContent=`Preparado: ${visible.length} paradas o indicios y ${visibleStays.length} estancias de plantel. Publicá el GeoJSON como capa en ArcGIS Online.`;
+};
 const shpChar=(name,width)=>({name,type:'C',width});
 const shpNum=(name,width,decimals=0)=>({name,type:'N',width,decimals});
 document.getElementById('exportVisibleShp').onclick=()=>{
  const feedback=document.getElementById('exportFeedback');
  try{
   const layers=[],[from,to]=selectedDates();
-  if(visible.length)layers.push({name:'paradas_visibles',points:visible,fields:[shpChar('EVENTO_ID',20),shpChar('PLACA',12),shpChar('INICIO',19),shpChar('FIN',19),shpNum('MINUTOS',12,2),shpChar('TIPO',28),shpChar('CLASE',19),shpChar('LUGAR',180),shpNum('LATITUD',12,6),shpNum('LONGITUD',13,6)],rows:visible.map(x=>[x.id,x.placa,x.inicio,x.fin,x.minutos,x.tipo,x.minutos>=240?'OTRA_ESTANCIA':'PARADA',x.lugar,x.lat,x.lon])});
+  if(visible.length)layers.push({name:'paradas_visibles',points:visible,fields:[shpChar('EVENTO_ID',36),shpChar('PLACA',12),shpChar('INICIO',19),shpChar('FIN',19),shpNum('MINUTOS',12,2),shpChar('TIPO',28),shpChar('CLASE',19),shpChar('ORIGEN',15),shpChar('RANGO',27),shpChar('LUGAR',180),shpNum('LATITUD',12,6),shpNum('LONGITUD',13,6)],rows:visible.map(x=>[x.id,x.placa,x.inicio,x.fin,x.minutos,x.tipo,x.fuente==='GPS estimado'?'GPS_ESTIMADO':x.minutos>=240?'OTRA_ESTANCIA':'PARADA',x.fuente==='GPS estimado'?'GPS_EST':'SATGEO',category(x)==='parking'?'>=4 h':bins[category(x)][0],x.lugar,x.lat,x.lon])});
   if(visibleStays.length)layers.push({name:'estancias_visibles',points:visibleStays,fields:[shpChar('EST_ID',14),shpChar('PLACA',12),shpChar('SITIO',38),shpChar('INICIO',19),shpChar('FIN',19),shpNum('HORAS',10,2),shpNum('HRS_REPOR',10,2),shpNum('HUECO_MIN',10,2),shpChar('LECTURA',35),shpNum('LATITUD',12,6),shpNum('LONGITUD',13,6)],rows:visibleStays.map(x=>[x.id,x.placa,x.sitio,x.inicio,x.fin,x.horas,x.horas_reportadas,x.hueco_min,x.lectura,x.lat,x.lon])});
   const sitesVisible=baseIncluded&&document.getElementById('showOriginals').checked&&document.getElementById('plantel').checked&&from<=reportEnd&&to>=reportStart;
   if(sitesVisible)layers.push({name:'planteles_confirmados',points:sites,fields:[shpChar('SITIO_ID',12),shpChar('NOMBRE',45),shpChar('CONFIRMA',3),shpNum('LATITUD',12,6),shpNum('LONGITUD',13,6)],rows:sites.map(x=>[x.id,x.nombre,'SI',x.lat,x.lon])});
   if(!layers.length)throw Error('No hay paradas o planteles visibles para exportar en estas fechas. Los KML GPS se exportan con el botón CSV de lecturas.');
-  const info=`Exportado desde el geovisor de Recolección (MSJ).\nPeriodo ${week.value}, placa ${plate.value||'todas'}, ${from} al ${to}.\n${visible.length} registros de parada fuera de plantel; ${visibleStays.length} estancias de 4 horas o más en planteles; ${sitesVisible?2:0} sitios confirmados.\nEl reporte de paradas cubre únicamente 21/10–03/11/2026; los KML GPS de otras fechas no generan paradas aquí.\nUna estancia agrupa registros SatGeo y sus extremos son primera y última parada reportadas.\nLos shapefiles son puntos WGS84 (EPSG:4326). Las rutas que cargaste como capa adicional no se incluyen: conservá su archivo original.\n`;
+  const info=`Exportado desde el geovisor de Recolección (MSJ).
+Periodo ${week.value}, placa ${plate.value||'todas'}, ${from} al ${to}.
+${visible.length} eventos visibles (${visible.filter(x=>x.fuente==='GPS estimado').length} indicios GPS de 1 a menos de 10 min); ${visibleStays.length} estancias de 4 horas o más en planteles; ${sitesVisible?2:0} sitios confirmados.
+El reporte SatGeo solo cubre 21/10–03/11/2026 desde 10 minutos. Los indicios menores de 10 se infieren de las lecturas GPS por baja movilidad (15 m, al menos tres lecturas, intervalos de hasta 90 s) y no confirman motor apagado. Los KML importados pueden aportar esos indicios, pero no eventos SatGeo desde 10 minutos.
+Una estancia agrupa registros SatGeo y sus extremos son primera y última parada reportadas.
+Los shapefiles son puntos WGS84 (EPSG:4326). Las rutas que cargaste como capa adicional no se incluyen: conservá su archivo original.
+`;
   const data=createPointShpZip(layers,info),name=`recoleccion_${week.value}_${plate.value||'todas'}_visible_SHP.zip`;
   download(new Blob([data],{type:'application/zip'}),name);
-  feedback.textContent=`Descarga preparada: ${visible.length} paradas, ${visibleStays.length} estancias en plantel y ${sitesVisible?2:0} planteles. El ZIP usa los filtros que ves ahora.`;
+  feedback.textContent=`Descarga preparada: ${visible.length} eventos (${visible.filter(x=>x.fuente==='GPS estimado').length} indicios GPS), ${visibleStays.length} estancias en plantel y ${sitesVisible?2:0} planteles. El ZIP usa los filtros que ves ahora.`;
  }catch(err){feedback.textContent='No se pudo crear el shapefile: '+(err.message||String(err))}
 };
 // Simbología de capas: símbolo único, valores únicos e intervalos numéricos.
@@ -869,7 +537,6 @@ const symbolPalettes = {
 };
 const symbolNumber = new Intl.NumberFormat('es-CR', {maximumFractionDigits: 3});
 let selectedSymbolLayerId = 'builtin_routes_2026';
-let symbolEditingEnabled = false; // Por seguridad se inicia siempre en consulta.
 
 function layerFeatures(item) {
   return (item.features || []).flatMap(group => group.features || []);
@@ -983,47 +650,18 @@ function symbolScheme(item) {
 function replaceStyledLayer(item) {
   if (item.layer && map.hasLayer(item.layer)) map.removeLayer(item.layer);
   makeUserLayer(item); arrangeUserLayers(); renderUserLayers(); renderSymbologyPanel(item.id);
-  if(attrSelection?.itemId===item.id){
-    const feature=attrSelection.feature;
-    clearAttributeHighlight();
-    const layer=attrFindLeaflet(item,feature);
-    if(layer)selectAttributes(item,feature,layer,{tab:attrActiveTab});
-    else renderAttributeDock();
-  }
   if (typeof renderPlannedRoutesCard === 'function') renderPlannedRoutesCard();
   scheduleWorkspaceSave();
 }
 
-let symbolConfigOpen = false; // Mantener abierta la clasificación cuando se cambia un parámetro.
-function openSymbolPanel(preferredId) {
-  const panel=document.getElementById('symbolPanel');
-  panel.open=true;
-  renderSymbologyPanel(preferredId);
-  panel.scrollIntoView({behavior:'smooth',block:'start'});
-}
 function renderSymbologyPanel(preferredId) {
   const select=document.getElementById('symbolLayer'), editor=document.getElementById('symbolEditor');
-  if (preferredId && preferredId !== selectedSymbolLayerId) symbolEditingEnabled=false;
   if (preferredId) selectedSymbolLayerId=preferredId;
   select.replaceChildren(); editor.replaceChildren();
-  const editButton=document.getElementById('symbolEditToggle');
-  const lockMessage=document.getElementById('symbolLockStatus');
-  function syncEditState() {
-    editButton.textContent=symbolEditingEnabled?'🔒 Bloquear edición':'✎ Activar edición';
-    editButton.classList.toggle('editing',symbolEditingEnabled);
-    document.getElementById('symbolPanel').classList.toggle('editMode',symbolEditingEnabled);
-    editButton.setAttribute('aria-pressed',String(symbolEditingEnabled));
-    lockMessage.classList.toggle('editing',symbolEditingEnabled);
-    lockMessage.textContent=symbolEditingEnabled
-      ? '✎ Edición activada · podés modificar nombres y clases.'
-      : '🔒 Nombres y visibilidad protegidos · colores libres.';
-  }
-  syncEditState();
   if (!userLayers.length) {
     const opt=document.createElement('option');opt.textContent='No hay capas';select.append(opt);
-    select.disabled=true;editButton.disabled=true;return;
+    select.disabled=true;return;
   }
-  editButton.disabled=false;
   select.disabled=false;
   for (const item of userLayers) {
     const opt=document.createElement('option');opt.value=item.id;opt.textContent=item.name;select.append(opt);
@@ -1033,11 +671,11 @@ function renderSymbologyPanel(preferredId) {
   const item=userLayers.find(x=>x.id===selectedSymbolLayerId), cfg=ensureSymbolConfig(item);
   const fields=layerFields(item), scheme=symbolScheme(item);
   const grid=document.createElement('div');grid.className='symbolGrid';
-  function selector(label,values,current,change,alwaysEditable=false) {
+  function selector(label,values,current,change) {
     const wrap=document.createElement('label');wrap.textContent=label;
     const input=document.createElement('select');
     values.forEach(([value,name])=>{const opt=document.createElement('option');opt.value=value;opt.textContent=name;input.append(opt)});
-    input.value=current;input.disabled=!(symbolEditingEnabled || alwaysEditable);input.onchange=()=>{if(symbolEditingEnabled || alwaysEditable)change(input.value)};wrap.append(input);grid.append(wrap);return input;
+    input.value=current;input.onchange=()=>change(input.value);wrap.append(input);grid.append(wrap);return input;
   }
   selector('Método', [['single','Símbolo único'],['unique','Valores únicos'],['equal','Intervalos iguales'],['quantile','Cuantiles']],cfg.mode,value=>{
     cfg.mode=value;cfg.classes={};if(value!=='single') {
@@ -1053,85 +691,48 @@ function renderSymbologyPanel(preferredId) {
       cfg.field=value;cfg.classes={};replaceStyledLayer(item);
     });
     selector('Colores',Object.keys(symbolPalettes).map(k=>[k,k==='pastel'?'Pastel':k==='vivo'?'Vivos':k==='azul'?'Azules':'Contraste']),cfg.palette,value=>{
-      cfg.palette=value;
-      // Cambiar la paleta solo actualiza colores: conserva etiquetas y visibilidad existentes.
-      const palette=symbolPalettes[value];
-      symbolScheme(item).classes.forEach((cls,i)=>{
-        cfg.classes[cls.key].color=palette[i%palette.length];
-      });
-      replaceStyledLayer(item);
-    },true);
+      cfg.palette=value;cfg.classes={};replaceStyledLayer(item);
+    });
     if(['equal','quantile'].includes(cfg.mode)) selector('Clases',Array.from({length:7},(_,i)=>[String(i+2),String(i+2)]),String(cfg.classCount),value=>{
       cfg.classCount=Number(value);cfg.classes={};replaceStyledLayer(item);
     });
   }
-  const configFold=document.createElement('details');configFold.className='symbolConfigFold';
-  configFold.open=symbolConfigOpen;
-  configFold.addEventListener('toggle',()=>{symbolConfigOpen=configFold.open;});
-  const configHead=document.createElement('summary');configHead.textContent='Clasificación y estilo';
-  const configBody=document.createElement('div');configBody.className='symbolConfigBody';
-  configBody.append(grid);configFold.append(configHead,configBody);editor.append(configFold);
+  editor.append(grid);
   if(cfg.mode==='single') {
     const label=document.createElement('label');label.textContent='Color de la capa';
-    const picker=document.createElement('input');picker.type='color';picker.value=item.color;picker.disabled=false;
+    const picker=document.createElement('input');picker.type='color';picker.value=item.color;
     picker.onchange=()=>{item.color=picker.value;replaceStyledLayer(item)};
     label.append(picker);editor.append(label);
   } else {
     const meta=document.createElement('p');meta.className='symbolMeta';
-    meta.textContent=`${scheme.classes.length} clase(s) · Tocá un color para cambiarlo.`;
+    meta.textContent=`${scheme.classes.length} clase(s). Activá, renombrá o cambiá el color de cada valor; las modificaciones se guardan en este navegador.`;
     editor.append(meta);
     const list=document.createElement('div');list.className='symbolClasses';
     for (const cls of scheme.classes) {
       const row=document.createElement('div');row.className='symbolClass';
-      // Solo existen controles editables de etiqueta y visibilidad si el usuario
-      // presionó expresamente «Activar edición». En consulta son texto e ícono.
-      let show;
-      if (symbolEditingEnabled) {
-        show=document.createElement('input');show.type='checkbox';show.checked=cls.visible;
-        show.setAttribute('aria-label','Mostrar '+cls.label);
-        show.onchange=()=>{
-          if(!symbolEditingEnabled){show.checked=cls.visible;return;}
-          if(!show.checked && scheme.classes.filter(c=>cfg.classes[c.key].visible).length<=1) {
-            show.checked=true;alert('Dejá al menos una clase visible.');return;
-          }
-          cfg.classes[cls.key].visible=show.checked;replaceStyledLayer(item);
-        };
-      } else {
-        show=document.createElement('span');show.className='symbolVisibleReadOnly'+(cls.visible?'':' isHidden');
-        show.textContent=cls.visible?'✓':'—';show.title=cls.visible?'Clase visible (solo lectura)':'Clase oculta (solo lectura)';
-        show.setAttribute('aria-label',show.title);
-      }
-      const picker=document.createElement('input');picker.type='color';picker.value=cls.color;picker.disabled=false;picker.setAttribute('aria-label','Color de '+cls.label);
+      const show=document.createElement('input');show.type='checkbox';show.checked=cls.visible;show.setAttribute('aria-label','Mostrar '+cls.label);
+      show.onchange=()=>{
+        if(!show.checked && scheme.classes.filter(c=>cfg.classes[c.key].visible).length<=1) {
+          show.checked=true;alert('Dejá al menos una clase visible.');return;
+        }
+        cfg.classes[cls.key].visible=show.checked;replaceStyledLayer(item);
+      };
+      const picker=document.createElement('input');picker.type='color';picker.value=cls.color;picker.setAttribute('aria-label','Color de '+cls.label);
       picker.onchange=()=>{cfg.classes[cls.key].color=picker.value;replaceStyledLayer(item)};
-      let name;
-      if (symbolEditingEnabled) {
-        name=document.createElement('input');name.type='text';name.value=cls.label;name.maxLength=90;
-        name.setAttribute('aria-label','Etiqueta de '+cls.defaultLabel);
-        name.onchange=()=>{
-          if (!symbolEditingEnabled)return;
-          cfg.classes[cls.key].label=name.value.trim()||cls.defaultLabel;
-          replaceStyledLayer(item);
-        };
-      } else {
-        name=document.createElement('span');name.className='symbolLabelReadOnly';
-        name.textContent=cls.label;name.title='Etiqueta de solo lectura. Usá Activar edición para renombrar.';
-      }
+      const name=document.createElement('input');name.type='text';name.value=cls.label;name.maxLength=90;name.setAttribute('aria-label','Etiqueta de '+cls.defaultLabel);
+      name.onchange=()=>{cfg.classes[cls.key].label=name.value.trim()||cls.defaultLabel;replaceStyledLayer(item)};
       const count=document.createElement('small');count.textContent=String(cls.count);
       row.append(show,picker,name,count);list.append(row);
     }
     editor.append(list);
   }
   const note=document.createElement('p');note.className='sectionHint';
-  note.textContent=symbolEditingEnabled?'Los cambios solo afectan la visualización.':'Los colores son editables; nombres y visibilidad requieren activar la edición.';
+  note.textContent='La simbología cambia la visualización; los atributos y el archivo original se conservan.';
   editor.append(note);
 }
 
 document.getElementById('symbolLayer').addEventListener('change', event => {
-  selectedSymbolLayerId=event.target.value;symbolEditingEnabled=false;renderSymbologyPanel();
-});
-document.getElementById('symbolEditToggle').addEventListener('click',()=>{
-  if(!userLayers.length)return;
-  symbolEditingEnabled=!symbolEditingEnabled;renderSymbologyPanel();
+  selectedSymbolLayerId=event.target.value;renderSymbologyPanel();
 });
 
 // Herramientas de proyecto: capas de rutas, actualización GPS y respaldo.
@@ -1149,7 +750,6 @@ function renderPlannedRoutesCard() {
   check.checked=!!item?.visible;check.disabled=!item;
   document.getElementById('restorePlan').hidden=!!item;
   document.getElementById('planSymbol').disabled=!item;
-  document.getElementById('planAttributes').disabled=!item;
   document.getElementById('planInfo').textContent=item
     ? `${plannedRoutes.features.length} polígonos con ZONA, DISTRITO, JORNADA (diurna, nocturna o vespertina) y FRECUENCIA (días). No hay hora exacta. Tocá una zona del mapa para ver sus datos.`
     : 'Quitaste esta capa de la vista. Podés restaurarla sin tocar los datos GPS o las paradas.';
@@ -1158,13 +758,9 @@ document.getElementById('showPlan').addEventListener('change',event=>{
   const item=plannedItem();if(!item)return;item.visible=event.target.checked;
   arrangeUserLayers();renderUserLayers();renderPlannedRoutesCard();scheduleWorkspaceSave();
 });
-document.getElementById('planAttributes').onclick=()=>{
-  const item=plannedItem();if(!item)return;
-  if(!item.visible){item.visible=true;arrangeUserLayers();renderUserLayers();renderPlannedRoutesCard();scheduleWorkspaceSave()}
-  openAttributeLayer(item);
-};
 document.getElementById('planSymbol').onclick=()=>{
-  openSymbolPanel('builtin_routes_2026');
+  renderSymbologyPanel('builtin_routes_2026');
+  document.getElementById('symbolPanel').scrollIntoView({behavior:'smooth',block:'start'});
 };
 document.getElementById('restorePlan').onclick=()=>{
   plannedRoutesIncluded=true;ensurePlannedRoutes();arrangeUserLayers();renderUserLayers();
@@ -1179,137 +775,6 @@ function layerPopup(feature, name) {
   const note=props.JORNADA || props.FRECUENCIA ? '<br><small>Jornada y días programados; sin hora exacta de entrada o salida.</small>' : '';
   return `<b>${esc(name)}</b>${attrs}${note}`;
 }
-
-
-// Tabla de atributos tipo SIG, abierta al hacer clic en un polígono o elemento de una capa.
-const attrDock=document.getElementById('attributeDock');
-const attrPageSize=40;
-let attrSelection=null,attrSelectedLeaflet=null,attrSelectedStyle=null,attrActiveTab='detail',attrPage=0;
-function attributeText(value) {
-  if(value===null||value===undefined||value==='')return '—';
-  if(typeof value==='object') {try{return JSON.stringify(value)}catch{return String(value)}}
-  return String(value);
-}
-function attrLayerById(id){return userLayers.find(x=>x.id===id)}
-function clearAttributeHighlight(){
-  if(attrSelectedLeaflet && attrSelectedStyle && typeof attrSelectedLeaflet.setStyle==='function'){
-    try{attrSelectedLeaflet.setStyle(attrSelectedStyle)}catch(e){console.debug('No se pudo restaurar el borde',e)}
-  }
-  attrSelectedLeaflet=null;attrSelectedStyle=null;
-}
-function closeAttributes(){clearAttributeHighlight();attrSelection=null;attrDock.hidden=true;attrDock.classList.remove('isMinimized')}
-function attrFindLeaflet(item,feature){
-  let match=null;
-  if(item?.layer)item.layer.eachLayer(l=>{if(l.feature===feature)match=l});
-  return match;
-}
-function attrZoom(item,feature,leaflet){
-  const obj=leaflet||attrFindLeaflet(item,feature);
-  if(obj?.getBounds){const b=obj.getBounds();if(b.isValid()){map.fitBounds(b.pad(.3),{maxZoom:17});return}}
-  if(obj?.getLatLng){map.setView(obj.getLatLng(),17);return}
-  try{const probe=L.geoJSON(feature),b=probe.getBounds();if(b.isValid())map.fitBounds(b.pad(.3),{maxZoom:17})}catch(e){console.debug('No se pudo acercar',e)}
-}
-function selectAttributes(item,feature,leaflet,options={}){
-  clearAttributeHighlight();
-  attrSelection={itemId:item.id,feature};
-  attrSelectedLeaflet=leaflet||attrFindLeaflet(item,feature);
-  if(attrSelectedLeaflet&&typeof attrSelectedLeaflet.setStyle==='function'){
-    const o=attrSelectedLeaflet.options;
-    attrSelectedStyle={color:o.color,weight:o.weight,opacity:o.opacity,fillColor:o.fillColor,fillOpacity:o.fillOpacity};
-    attrSelectedLeaflet.setStyle({color:'#ffbf30',weight:4,opacity:1,fillOpacity:(feature.geometry?.type?.includes('Polygon') ? .35 : .95)});
-  }
-  if(options.tab)attrActiveTab=options.tab;
-  else attrActiveTab='detail';
-  attrPage=0;attrDock.hidden=false;attrDock.classList.remove('isMinimized');
-  document.getElementById('attributeBody').hidden=false;
-  document.getElementById('attributeMinimize').textContent='—';
-  document.getElementById('attributeMinimize').title='Contraer tabla';
-  renderAttributeDock();
-  if(options.zoom)attrZoom(item,feature,attrSelectedLeaflet);
-}
-function openAttributeLayer(item){
-  const features=layerFeatures(item);
-  if(!features.length)return;
-  const chosen=attrSelection?.itemId===item.id ? attrSelection.feature : features[0];
-  selectAttributes(item,chosen,attrFindLeaflet(item,chosen),{tab:'all'});
-}
-function renderAttributeDock(){
-  if(!attrSelection)return;
-  const item=attrLayerById(attrSelection.itemId),feature=attrSelection.feature;
-  if(!item){closeAttributes();return}
-  const all=layerFeatures(item),index=all.indexOf(feature),properties=feature.properties||{};
-  const zone=properties.ZONA??properties.Zona??properties.zona??properties.RUTA??properties.Ruta??properties.NOMBRE??properties.Nombre;
-  const district=properties.DISTRITO??properties.Distrito??properties.distrito;
-  document.getElementById('attributeLayerName').textContent=item.name;
-  document.getElementById('attributeTitle').textContent=zone!==null&&zone!==undefined&&zone!==''?`Zona / elemento: ${attributeText(zone)}`:`Elemento ${index>=0?index+1:'seleccionado'}`;
-  document.getElementById('attributeSummary').textContent=`${district?'Distrito: '+district+' · ':''}${all.length.toLocaleString('es-CR')} registros en la capa`;
-  document.getElementById('attrDetailTab').classList.toggle('active',attrActiveTab==='detail');
-  document.getElementById('attrAllTab').classList.toggle('active',attrActiveTab==='all');
-  document.getElementById('attrDetailTab').setAttribute('aria-selected',String(attrActiveTab==='detail'));
-  document.getElementById('attrAllTab').setAttribute('aria-selected',String(attrActiveTab==='all'));
-  document.getElementById('attrDetailView').hidden=attrActiveTab!=='detail';
-  document.getElementById('attrAllView').hidden=attrActiveTab!=='all';
-  const body=document.getElementById('attributeFields');body.replaceChildren();
-  const priority=['ZONA','RUTA','DISTRITO','JORNADA','FRECUENCIA'];
-  const entries=Object.entries(properties).sort((a,b)=>{
-    const k=x=>priority.indexOf(x.toUpperCase());
-    return (k(a[0])<0?999:k(a[0]))-(k(b[0])<0?999:k(b[0]));
-  });
-  if(!entries.length)entries.push(['Atributos','No hay campos de atributos']);
-  for(const [field,value] of entries){
-    const tr=document.createElement('tr'),th=document.createElement('th'),td=document.createElement('td');
-    th.scope='row';th.textContent=field;td.textContent=attributeText(value);tr.append(th,td);body.append(tr);
-  }
-  const geometry=feature.geometry?.type||'Desconocida';
-  document.getElementById('attributeGeometry').textContent=`Registro ${index>=0?index+1:'—'} de ${all.length} · Geometría: ${geometry}`;
-  if(attrActiveTab==='all')renderAttributeFullTable();
-}
-function renderAttributeFullTable(){
-  if(!attrSelection)return;
-  const item=attrLayerById(attrSelection.itemId);if(!item)return;
-  const data=layerFeatures(item),headers=layerFields(item).map(f=>f.name);
-  const q=document.getElementById('attributeSearch').value.trim().toLocaleLowerCase();
-  const matching=q?data.map((f,i)=>({f,i})).filter(({f})=>Object.values(f.properties||{}).some(v=>attributeText(v).toLocaleLowerCase().includes(q))):data.map((f,i)=>({f,i}));
-  const totalPages=Math.max(1,Math.ceil(matching.length/attrPageSize));attrPage=Math.max(0,Math.min(attrPage,totalPages-1));
-  document.getElementById('attributeCount').textContent=`${matching.length.toLocaleString('es-CR')} de ${data.length.toLocaleString('es-CR')}`;
-  const thead=document.getElementById('attributeColumnHeaders'),tbody=document.getElementById('attributeRows');
-  thead.replaceChildren();tbody.replaceChildren();
-  const rowHead=document.createElement('tr');
-  for(const name of ['N.º',...headers]){
-    const th=document.createElement('th');th.scope='col';th.textContent=name;rowHead.append(th);
-  }
-  thead.append(rowHead);
-  for(const {f,i} of matching.slice(attrPage*attrPageSize,(attrPage+1)*attrPageSize)){
-    const tr=document.createElement('tr');tr.classList.toggle('selectedRow',f===attrSelection.feature);
-    tr.title='Seleccionar este elemento y acercar el mapa';tr.tabIndex=0;
-    for(const value of [i+1,...headers.map(h=>f.properties?.[h])]){
-      const td=document.createElement('td');td.textContent=attributeText(value);td.title=td.textContent;tr.append(td);
-    }
-    const act=()=>selectAttributes(item,f,attrFindLeaflet(item,f),{tab:'detail',zoom:true});
-    tr.addEventListener('click',act);tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();act()}});
-    tbody.append(tr);
-  }
-  if(!matching.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=headers.length+1;td.textContent='No hay registros que coincidan con la búsqueda.';tr.append(td);tbody.append(tr)}
-  document.getElementById('attributePaging').textContent=`Página ${attrPage+1} de ${totalPages}`;
-  document.getElementById('attributePrev').disabled=attrPage===0;
-  document.getElementById('attributeNext').disabled=attrPage>=totalPages-1;
-}
-document.getElementById('attributeClose').addEventListener('click',closeAttributes);
-document.getElementById('attributeMinimize').addEventListener('click',()=>{
-  const minimized=attrDock.classList.toggle('isMinimized');
-  document.getElementById('attributeBody').hidden=minimized;
-  document.getElementById('attributeMinimize').textContent=minimized?'▢':'—';
-  document.getElementById('attributeMinimize').title=minimized?'Expandir tabla':'Contraer tabla';
-});
-document.getElementById('attrDetailTab').addEventListener('click',()=>{attrActiveTab='detail';renderAttributeDock()});
-document.getElementById('attrAllTab').addEventListener('click',()=>{attrActiveTab='all';attrPage=0;renderAttributeDock()});
-document.getElementById('attributeSearch').addEventListener('input',()=>{attrPage=0;renderAttributeFullTable()});
-document.getElementById('attributePrev').addEventListener('click',()=>{attrPage--;renderAttributeFullTable()});
-document.getElementById('attributeNext').addEventListener('click',()=>{attrPage++;renderAttributeFullTable()});
-document.getElementById('attrZoomSelected').addEventListener('click',()=>{
-  if(!attrSelection)return;const item=attrLayerById(attrSelection.itemId);
-  if(item)attrZoom(item,attrSelection.feature,attrSelectedLeaflet);
-});
 
 function makeLayerId() {
   return 'layer_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
@@ -1330,10 +795,7 @@ function makeUserLayer(item) {
       pane: paneName, radius: 6, color: '#fff', weight: 1.2,
       fillColor: symbols.forFeature(feature).color, fillOpacity: .9,
     }),
-    onEachFeature: (feature, layer) => {
-      layer.bindPopup(layerPopup(feature, item.name));
-      layer.on('click', () => selectAttributes(item,feature,layer));
-    },
+    onEachFeature: (feature, layer) => layer.bindPopup(layerPopup(feature, item.name)),
   });
   return item.layer;
 }
@@ -1402,15 +864,13 @@ function renderUserLayers() {
       zoom.onclick = () => { item.visible = true; arrangeUserLayers();
         const b=item.layer.getBounds();if(b.isValid())map.fitBounds(b.pad(.08));
         renderUserLayers();renderPlannedRoutesCard();scheduleWorkspaceSave(); };
-      const attributes=document.createElement('button');attributes.className='secondary';attributes.textContent='Atributos';
-      attributes.onclick=()=>openAttributeLayer(item);
       const symbol = document.createElement('button'); symbol.className = 'secondary';symbol.textContent = 'Simbología';
-      symbol.onclick = () => { openSymbolPanel(item.id); };
+      symbol.onclick = () => { renderSymbologyPanel(item.id);document.getElementById('symbolPanel').scrollIntoView({behavior:'smooth',block:'start'}); };
       const remove = document.createElement('button'); remove.className = 'secondary'; remove.textContent = 'Quitar';
-      remove.onclick = () => { if(attrSelection?.itemId===item.id)closeAttributes();map.removeLayer(item.layer); userLayers = userLayers.filter(x => x !== item);
+      remove.onclick = () => { map.removeLayer(item.layer); userLayers = userLayers.filter(x => x !== item);
         if(item.id==='builtin_routes_2026')plannedRoutesIncluded=false;
         arrangeUserLayers(); renderUserLayers(); renderSymbologyPanel();renderPlannedRoutesCard();scheduleWorkspaceSave(); };
-      controls.append(toggle, position, up, down, zoom, attributes, symbol, remove); row.append(controls); box.append(row);
+      controls.append(toggle, position, up, down, zoom, symbol, remove); row.append(controls); box.append(row);
     });
   }
 }
@@ -1457,7 +917,7 @@ function showImportedPeriod(loadedDays) {
     fromInput.value = ''; toInput.value = ''; clampDates();
     return `Se muestra la semana ${week.value} (siete días).`;
   }
-  week.value = 'history'; document.getElementById('dateFilters').open = true; clampDates();
+  week.value = 'history'; clampDates();
   const cutoff = new Date(Date.parse(last + 'T00:00:00Z') - 6 * 86400000).toISOString().slice(0, 10);
   fromInput.value = first > cutoff ? first : cutoff;
   toInput.value = last;
@@ -1465,12 +925,12 @@ function showImportedPeriod(loadedDays) {
 }
 
 function workspaceSnapshot() {
-  return {format: VIEWER_FORMAT, savedAt: new Date().toISOString(),
+  return {format: VIEWER_FORMAT, stopBinsVersion:2, savedAt: new Date().toISOString(),
     baseIncluded, plannedRoutesIncluded,
     overlays: userLayers.map(({id, name, color, slot, visible, features, symbology}) =>
       ({id, name, color, slot, visible, features, symbology})),
     trackOverrides,
-    filters: {basemap: currentBasemapKey, week: week.value, plate: plate.value,
+    filters: {week: week.value, plate: plate.value,
       from: document.getElementById('from').value, to: document.getElementById('to').value,
       showOriginals: document.getElementById('showOriginals').checked,
       route: document.getElementById('route').checked,
@@ -1514,7 +974,6 @@ function applyWorkspace(normalized) {
     }
     checkUserBounds(makeUserLayer(item));
   }
-  closeAttributes();symbolEditingEnabled=false;
   for (const item of userLayers) if (item.layer && map.hasLayer(item.layer)) map.removeLayer(item.layer);
   userLayers = normalized.overlays;
   plannedRoutesIncluded=normalized.plannedRoutesIncluded;
@@ -1522,11 +981,9 @@ function applyWorkspace(normalized) {
   trackOverrides = normalized.trackOverrides;
   baseIncluded = normalized.baseIncluded;
   const f = normalized.filters;
-  selectBasemap(f.basemap,{save:false});
   week.value = f.week; plate.value = f.plate;
   document.getElementById('from').value = f.from;
   document.getElementById('to').value = f.to;
-  document.getElementById('dateFilters').open = f.week === 'history' || Boolean(f.from || f.to);
   document.getElementById('showOriginals').checked = f.showOriginals;
   document.getElementById('route').checked = f.route;
   document.getElementById('showStops').checked = f.showStops;
